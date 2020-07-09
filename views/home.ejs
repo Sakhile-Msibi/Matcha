@@ -1,0 +1,103 @@
+<% include header %>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<h5 class="ui header divider" style="color:white">
+  <i class="bar chart icon" style="color:white"></i>
+  Trier par :
+</h5>
+
+<div class="center aligned">
+	<div class="field">
+		<a href="/home/age">
+			<button type="submit" class="ui red button" style="display:block;margin:auto">
+				<i class="birthday icon"></i> Age
+			</button>
+		</a>
+	</div>
+	<br/>
+	<div class="field">
+		<a href="/home/tag">
+			<button type="submit" class="ui red button" style="display:block;margin:auto">
+				<i class="tag icon"></i> Tags
+			</button>
+		</a>
+	</div>
+	<br/>
+	<div class="field">
+		<a href="/home/popular">
+			<button type="submit" class="ui red button" style="display:block;margin:auto">
+				<i class="star icon"></i> Popularity
+			</button>
+		</a>
+	</div>
+	<br/>
+	<div class="field">
+		<a href="/home">
+			<button type="submit" class="ui red button" style="display:block;margin:auto">
+				<i class="reply icon"></i> Default
+			</button>
+		</a>
+	</div>
+</div>
+
+<hr>
+
+<% if (profile == undefined) { %>
+	<div class="ui negative message">
+		<i class="close icon"></i>
+		<div class="header">
+			Please improve your profile
+		</div>
+	</div>
+<% } else { %>
+    <% profile.forEach(function(element) { %>
+	<% const picture = element["main_picture"] %>
+	<% const name = element["name"] %>
+	<% const surname = element["surname"] %>
+	<% const gender = element["gender"] %>
+	<% const age = element["age"] %>
+	<% const description = element["description"] %>
+	<% const signin = element["signin"] %>
+    <% if (skip1 != signin && skip2 != signin && skip != signin) { %>
+        <a href="/user/<%= signin %>">
+	    	<div class="ui people shape">
+		        <div class="sides">
+			        <div class="side active">
+				        <div class="ui card">
+					        <div class="image">
+						        <img src="/images/upload_images/<%= pic %>">
+    					    </div>
+	    				    <div class="content">
+		    				    <div class="header"><%= name %> <%= surname %></div>
+			    				<div class="meta">
+				    				<%= gender %>, <%= age %> ans
+					    		</div>
+						    	<div class="description">
+							    	<%= description %>
+    							</div>
+	    					</div>
+		    				<div class="extra content">
+			    				<span class="right floated">
+				    		    	Joined in 2020
+					    		</span>
+    						</div>
+	    				</div>
+		    		</div>
+			    </div>
+    		</div>
+	    <% } %>
+	<% }) %>
+<% } %>
+
+
+<% include footer %>
+
+<script>
+$(".close.icon").click(function(){
+  $(this).parent().hide();
+});
+</script>
