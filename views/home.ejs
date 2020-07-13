@@ -5,7 +5,7 @@
 <br>
 <br>
 <br>
-<h5 class="ui header divider" style="color:white">
+<h5 class="ui horizontal header divider" style="color:white">
   <i class="bar chart icon" style="color:white"></i>
   Trier par :
 </h5>
@@ -54,42 +54,44 @@
 		</div>
 	</div>
 <% } else { %>
-    <% profile.forEach(function(element) { %>
-	<% const picture = element["main_picture"] %>
-	<% const name = element["name"] %>
-	<% const surname = element["surname"] %>
-	<% const gender = element["gender"] %>
-	<% const age = element["age"] %>
-	<% const description = element["description"] %>
-	<% const signin = element["signin"] %>
-    <% if (skip1 != signin && skip2 != signin && skip != signin) { %>
-        <a href="/user/<%= signin %>">
-	    	<div class="ui people shape">
-		        <div class="sides">
-			        <div class="side active">
-				        <div class="ui card">
-					        <div class="image">
-						        <img src="/images/upload_images/<%= pic %>">
-    					    </div>
-	    				    <div class="content">
-		    				    <div class="header"><%= name %> <%= surname %></div>
-			    				<div class="meta">
-				    				<%= gender %>, <%= age %> ans
-					    		</div>
-						    	<div class="description">
-							    	<%= description %>
-    							</div>
-	    					</div>
-		    				<div class="extra content">
-			    				<span class="right floated">
-				    		    	Joined in 2020
-					    		</span>
-    						</div>
-	    				</div>
-		    		</div>
-			    </div>
-    		</div>
-	    <% } %>
+	<% profile.forEach(function(element) { %>
+	<% var pic = element["profilePic"] %>
+	<% var name = element["name"] %>
+	<% var lname = element["surname"] %>
+	<% var gender = element["gender"] %>
+	<% var age = element["age"] %>
+	<% var descri = element["description"] %>
+	<% var signin = element["signin"] %>
+	<% if (skip1 != signin && skip2 != signin && skip != signin) { %>
+	<a href="/user/<%= signin %>">
+		<div class="ui people shape">
+		<div class="sides">
+			<div class="side active">
+				<div class="ui card">
+					<div class="image">
+						<img src="/images/upload_images/<%= pic %>">
+					</div>
+					<div class="content">
+						<div class="header"><%= name %> <%= lname %></div>
+							<div class="meta">
+								<%= gender %>, <%= age %> ans
+							</div>
+							<div class="description">
+								<%= descri %>
+							</div>
+						</div>
+						<div class="extra content">
+							<span class="right floated">
+							Joined in 2020
+							</span>
+							<span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	<% } %>
 	<% }) %>
 <% } %>
 
