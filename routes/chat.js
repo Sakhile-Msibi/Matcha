@@ -1,16 +1,16 @@
-var express = require('express'),
-	connect = require('../config/conn.js'),
-	session = require('express-session'),
-	router = express.Router()
+var conn = require('../config/conn.js');
+var express = require('express');
+var session = require('express-session');
+var router = express.Router();
 
 router.get('/:id', function(req, res, next) {
 	if (req.session && req.session.signin) {
 		if (req.params.id) {
-			connect.query("SELECT * from matched WHERE signin = ? AND matched = ?", [req.session.signin, req.params.id], (err, rows, result) => {
+			conn.query("SELECT * from matched WHERE signin = ? AND matched = ?", [req.session.signin, req.params.id], (err, rows, result) => {
 				if (err) console.log(err)
 				if (rows[0] != undefined) {
 					var talkto = req.params.id
-					connect.query("SELECT * FROM message WHERE (signin = ? AND user = ?) OR (signin = ? AND user = ?) ORDER BY sendDate ASC", [talkto, req.session.signin, req.session.signin, talkto], (err, rows, result) => {
+					conn.query("SELECT * FROM message WHERE (signin = ? AND user = ?) OR (signin = ? AND user = ?) ORDER BY sendDate ASC", [talkto, req.session.signin, req.session.signin, talkto], (err, rows, result) => {
 						if (err) console.log(err)
 						var message = rows
 						res.render('chat', { title: 'Express', me: req.session.signin, talkto: talkto, message: message })

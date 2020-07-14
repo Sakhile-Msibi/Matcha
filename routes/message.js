@@ -1,14 +1,14 @@
-var express = require('express'),
-	connect = require('../config/conn.js'),
-	session = require('express-session'),
-	router = express.Router()
+var conn = require('../config/conn.js');
+var express = require('express');
+var session = require('express-session');
+var router = express.Router();
 
 router.get('/', function(req, res, next) {
 	if (req.session && req.session.signin) {
-		connect.query("SELECT * FROM matched WHERE signin = ? LIMIT 1", [req.session.signin], (err, rows, result) => {
+		conn.query("SELECT * FROM matched WHERE signin = ? LIMIT 1", [req.session.signin], (err, rows, result) => {
 			if (err) console.log(err)
 			if (rows[0] != undefined) {
-				connect.query("SELECT m.matched, u.profilePic FROM matched m INNER JOIN user u ON m.matched = u.signin WHERE m.signin = ?", [req.session.signin], (err1, rows1, result1) => {
+				conn.query("SELECT m.matched, u.profilePic FROM matched m INNER JOIN user u ON m.matched = u.signin WHERE m.signin = ?", [req.session.signin], (err1, rows1, result1) => {
 					if (err) console.log(err)
 					var matched = rows1
  					res.render('message', { title: 'Express', matched: matched })
@@ -27,7 +27,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/:id', function(req, res, next) {
 	if (req.session && req.session.signin) {
-		connect.query("SELECT * FROM matched WHERE signin = ? AND matched = ?", [req.session.signin, req.params.id], (err, rows, result) => {
+		conn.query("SELECT * FROM matched WHERE signin = ? AND matched = ?", [req.session.signin, req.params.id], (err, rows, result) => {
 			if (err) console.log(err)
 			if (rows[0] != undefined) {
 				req.session.success = 'Hello';

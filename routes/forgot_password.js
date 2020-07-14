@@ -1,8 +1,10 @@
-var express = require('express'),
-	connect = require('../config/conn.js')
-var mailer = require('nodemailer')
-var regex = require('regex-email')
-var router = express.Router()
+var conn = require('../config/conn.js');
+var express = require('express');
+var session = require('express-session');
+var nodeMail = require('node-mailer');
+var regexMail = require('regex-email');
+var router = express.Router();
+
 
 router.get('/', function(req, res, next) {
 	res.render('forgot_password')
@@ -10,16 +12,16 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
 	var mail = req.body.email
-	if (!regex.test(mail)) {
+	if (!regexMail.test(mail)) {
 		req.session.error = 'Invalid email';
 		res.redirect('/')
 	} else {
-		connect.query('SELECT hash, signin FROM user WHERE email = ?', [mail], (err, rows, result) => {
+		conn.query('SELECT hash, signin FROM user WHERE email = ?', [mail], (err, rows, result) => {
 			if (err) console.log(err)
 			if (rows[0] != undefined) {
 				var hash = rows[0].hash
 				var signin = rows[0].signin
-					var smtpTransport = mailer.createTransport({
+					var smtpTransport = nodeMail.createTransport({
 						service: 'Gmail',
 						auth: {
 							user: 'thembinkosimsibi198@gmail.com',

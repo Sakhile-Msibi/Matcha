@@ -8,7 +8,7 @@ var socketIoSession = require('socket.io.session');
 var favicon = require('serve-favicon');
 var bcryptjs = require('bcryptjs');
 var logger = require('morgan');
-var connect = require('./config/conn.js');
+var conn = require('./config/conn.js');
 var flash = require('req-flash');
 var app = express();
 var server = require('http').createServer(app);
@@ -94,7 +94,7 @@ app.use(function(req, res, next) {
 	res.locals.descri = req.session.descri
 	res.locals.profilePic = req.session.profilePic
 	res.locals.log = req.session.log
-	connect.query("SELECT readed FROM notice WHERE signin = ? AND readed = 0 LIMIT 1", [req.session.signin], (err, rows, result) => {
+	conn.query("SELECT readed FROM notice WHERE signin = ? AND readed = 0 LIMIT 1", [req.session.signin], (err, rows, result) => {
 		if (err) console.log(err)
 		if (rows[0] != undefined) {
 			res.locals.cheecked = true
@@ -129,7 +129,7 @@ app.io.on('connection', function(socket){
 	console.log('a user connected')
 	var me = false
 	socket.on('log', function(user){
-		connect.query("UPDATE user SET online = 1 WHERE signin = ?", [user.signin], (err) => {
+		conn.query("UPDATE user SET online = 1 WHERE signin = ?", [user.signin], (err) => {
 			if (err) threw (err)
 			people[user.signin] = socket.id
 		})
@@ -145,9 +145,9 @@ app.io.on('connection', function(socket){
 		date = new Date()
 		message.h = date.getHours()
 		message.m = date.getMinutes()
-		connect.query('INSERT INTO message SET signin = ?, sendDate = ?, user = ?, message = ?', [message.moi, date, message.recup, message.message], (err) => {
-			var notifmsg = message.recup + ' Vous a envoye un message'
-			connect.query('INSERT INTO notice SET signin = ?, sendDate = ?, type = ?, msg = ?, readed = 0', [message.moi, date, "message", notifmsg], (err) => {
+		conn.query('INSERT INTO message SET signin = ?, sendDate = ?, user = ?, message = ?', [message.moi, date, message.recup, message.message], (err) => {
+			var notifmsg = message.recup + '  sent you a message';
+			conn.query('INSERT INTO notice SET signin = ?, sendDate = ?, type = ?, msg = ?, readed = 0', [message.moi, date, "message", notifmsg], (err) => {
 				if (err) console.log(err)
 				socket.send(people[message.moi]).emit('newmsgs', {
 					name: message.moi,
@@ -164,7 +164,7 @@ app.io.on('connection', function(socket){
 		if (!me) {
 			return false
 		}
-		connect.query("UPDATE user SET online = 0 WHERE signin = ?", [me], (err) => {
+		conn.query("UPDATE user SET online = 0 WHERE signin = ?", [me], (err) => {
 			if (err) threw (err)
 		})
   	})

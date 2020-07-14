@@ -1,8 +1,9 @@
-var express = require('express'),
-	bcrypt = require('bcryptjs'),
-	connect = require('../config/conn.js')
-var mailer = require('nodemailer')
-var router = express.Router()
+var conn = require('../config/conn.js');
+var express = require('express');
+var session = require('express-session');
+var nodeMail = require('node-mailer');
+var bcryptjs = require('bcryptjs');
+var router = express.Router();
 
 router.get('/', function(req, res, next) {
 	res.redirect('/')
@@ -10,7 +11,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/:hash', function(req, res, next) {
 	if (req.params.hash) {
-		connect.query("SELECT id FROM user WHERE hash = ?", [req.params.hash], (err, rows, result) => {
+		conn.query("SELECT id FROM user WHERE hash = ?", [req.params.hash], (err, rows, result) => {
 			if (err) console.log(err)
 			if (rows[0] != undefined) {
 				var id = rows[0].id
@@ -25,7 +26,7 @@ router.get('/:hash', function(req, res, next) {
 	}
 })
 
-const	salt = 10
+const	code = 10
 
 router.post('/', function(req, res, next) {
 	var pswd = req.body.pswd,
@@ -33,8 +34,8 @@ router.post('/', function(req, res, next) {
 		usr = req.body.usr
 	if (pswd && req) {
 		if (usr) {
-			var	hash = bcrypt.hashSync(req.body.pswd, salt)
-			connect.query("UPDATE user SET passwd = ? WHERE id = ?", [hash, usr], (err) => {
+			var	hash = bcryptjs.hashSync(req.body.pswd, code)
+			conn.query("UPDATE user SET passwd = ? WHERE id = ?", [hash, usr], (err) => {
 				if (err) console.log(err)
 				req.session.success = "Password changed";
 				res.redirect('/signin')

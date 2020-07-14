@@ -1,14 +1,15 @@
-var express = require('express'),
-	connect = require('../config/conn.js')
-var router = express.Router()
+var conn = require('../config/conn.js');
+var express = require('express');
+var session = require('express-session');
+var router = express.Router();
 
 router.get('/', function(req, res, next) {
 	if (req.session && req.session.signin) {
-		connect.query("SELECT * FROM notice WHERE signin = ? ORDER BY sendDate DESC LIMIT 25", [req.session.signin], (err, rows, result) => {
+		conn.query("SELECT * FROM notice WHERE signin = ? ORDER BY sendDate DESC LIMIT 25", [req.session.signin], (err, rows, result) => {
 			if (err) console.log(err)
 			if (rows[0] != undefined) {
 				var notice = rows
-				connect.query("SELECT readed FROM notice WHERE signin = ? LIMIT 1", [req.session.signin], (err1, rows1, result1) => {
+				conn.query("SELECT readed FROM notice WHERE signin = ? LIMIT 1", [req.session.signin], (err1, rows1, result1) => {
 					if (err1) console.log(err1)
 					if (rows1[0] == undefined)
 						res.render('notice', { title: 'Express', notice: notice })
@@ -29,9 +30,9 @@ router.get('/', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
 	if (req.session && req.session.signin) {
 		if (req.params.id) {
-			connect.query("SELECT MAX(id) as max FROM notice", (err, rows, result) => {
+			conn.query("SELECT MAX(id) as max FROM notice", (err, rows, result) => {
 				if (req.params.id <= rows[0].max && req.params.id >= 0) {
-					connect.query("UPDATE notice SET readed = 1 WHERE signin = ? AND id = ?", [req.session.signin, req.params.id], (err) => {
+					conn.query("UPDATE notice SET readed = 1 WHERE signin = ? AND id = ?", [req.session.signin, req.params.id], (err) => {
 						if (err) console.log(err)
 						res.locals.cheecked = undefined
 						req.session.success = 'The notice has been read';

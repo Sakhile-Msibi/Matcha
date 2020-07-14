@@ -1,7 +1,7 @@
 <% include header %>
 
 <div class="ui segment">
-<h2 class="ui right floated header">Votre profile</h2>
+<h2 class="ui right floated header">Profile</h2>
 <br>
 <hr>
 <br>
@@ -13,37 +13,37 @@
 				<% if (profilePic) { %>
                 	<img alt="User Pic" src="images/upload_images/<%=profilePic%>" class="ui medium circular image">	
 				<% } else { %>
-					<img class="ui medium circular image" src="images/profile/steve.jpg">
+					<img class="ui medium circular image" src="images/profile/lio.jpg">
 				<% } %>
 				<input class="form-control" type="file" name="uploaded_image" accept=""/>
 				<hr>
 				<div class="ui center">
-					<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Envoyer ">
+					<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Submit ">
             	</div>
 			</form>
 		</div>
 	</div>
     <div class="column">
 		<div class="ui segment">
-			<div class="ui teal empty circular label"></div> En Ligne
+			<div class="ui teal empty circular label"></div> Online
 			<hr class="ui">
 			<form class="ui form segment" method="post" action="/profile/base">
 				<div class="ui large header" style="color:white"> <%= locals.name + ' ' + locals.surname %> </div>
 			<% if (locals.gender == "male") { %>
 				<p>
-					Homme, <%= locals.age %>ans
+					Men, <%= locals.age %> years old
 				</p>
 			<% } else if (locals.gender == "female") { %>
 				<p>
-					Femme, <%= locals.age %>ans
+					Women, <%= locals.age %> years old
 				</p>
 			<% } %>
 			<% if (locals.interest == "male") { %>
-				<p> Interresse par: &nbsp; Hommes <p>
+				<p> Interested in: &nbsp; Men <p>
 			<% } else if (locals.interest == "female") { %>
-				<p> Interresse par: &nbsp; Femmes <p>
+				<p> Interested in: &nbsp; Women <p>
 			<% } else if (locals.interest == "both") { %>
-				<p> Interresse par: &nbsp; Les deux <p>
+				<p> Interested in: &nbsp; Both <p>
 			<% } %>
 			<hr class="ui">
 				<div class="two fields">
@@ -52,7 +52,7 @@
 						<input placeholder="First Name" name="name" type="text">
 					<hr class="ui">
 						<div class="ui center">
-							<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Envoyer ">
+							<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Submit ">
 						</div>
 					</div>
 					<div class="field">
@@ -60,7 +60,7 @@
 						<input placeholder="Last Name" name="surname" type="text">
 					<hr class="ui">
 						<div class="ui center">
-							<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Envoyer ">
+							<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Submit ">
 						</div>
 					</div>
 				</div>
@@ -84,11 +84,11 @@
 			<% } %>
 		</div>
 		<div class="field">
-			<label>Entrez vos hobbies ou interets</label>
+			<label>Enter your interests</label>
 			<input type="text" name="tag" placeholder="exemple: musculation">
 		</div>
 		<div class="ui center">
-			<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Envoyer ">
+			<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Submit ">
 		</div>
 	</form>
 	</div>
@@ -96,11 +96,11 @@
 	</div>
 	<% if (!locals.ok) { %>
 		<div class="ui top pointing red basic label" style="background:none;height:2%">
-			 Vous devez editer votre profile pour pouvoir continuer!
+			Please first edit your profile
 		</div>
 	<% } %>
 
-	<a href="user/<%= locals.signin %>">Preview de votre profile</a>
+	<a href="user/<%= locals.signin %>">Preview your profile</a>
 			
 	<br>
 	<hr style="width:100%">
@@ -110,7 +110,7 @@
 			<div class="card">
 				<div class="image">
 					<% if (!photo1) { %>
-						<img style="width:50%" src="/images/profile/steve.jpg">
+						<img style="width:50%" src="/images/profile/lio.jpg">
 					<% } else { %>
 						<img src="/images/upload_images/<%=photo1%>">
 					<% } %>
@@ -119,7 +119,7 @@
 			<input class="form-control" type="file" name="uploaded_image" accept=""/>
 			<hr>
 				<div class="ui center">
-					<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Envoyer ">
+					<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Submit ">
 				</div>
 			</form>
 		</div>
@@ -128,7 +128,7 @@
 			<div class="card">
 				<div class="image">
 					<% if (!photo2) { %>
-						<img style="width:50%" src="/images/profile/steve.jpg">
+						<img style="width:50%" src="/images/profile/lio.jpg">
 					<% } else { %>
 						<img src="/images/upload_images/<%=photo2%>">
 					<% } %>
@@ -137,7 +137,7 @@
 			<input class="form-control" type="file" name="uploaded_image" accept=""/>
 			<hr>
 				<div class="ui center">
-					<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Envoyer ">
+					<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Submit ">
 				</div>
 			</form>
 		</div>
@@ -146,7 +146,7 @@
 			<div class="card">
 				<div class="image">
 					<% if (!photo3) { %>
-						<img style="width:50%" src="/images/profile/steve.jpg">
+						<img style="width:50%" src="/images/profile/lio.jpg">
 					<% } else { %>
 						<img src="/images/upload_images/<%=photo3%>">
 					<% } %>
@@ -155,7 +155,7 @@
 			<input class="form-control" type="file" name="uploaded_image" accept=""/>
 			<hr>
 				<div class="ui center">
-					<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Envoyer ">
+					<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Submit ">
 				</div>
 			</form>
 		</div>
@@ -164,7 +164,7 @@
 			<div class="card">
 				<div class="image">
 					<% if (!photo4) { %>
-						<img style="width:50%" src="/images/profile/steve.jpg">
+						<img style="width:50%" src="/images/profile/lio.jpg">
 					<% } else { %>
 						<img src="/images/upload_images/<%=photo4%>">
 					<% } %>
@@ -173,7 +173,7 @@
 			<input class="form-control" type="file" name="uploaded_image" accept=""/>
 			<hr>
 				<div class="ui center">
-					<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Envoyer ">
+					<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Submit ">
 				</div>
 			</form>
 		</div>
@@ -183,12 +183,11 @@
 	<form class="ui form segment" method="post" action="/profile/des">
 		<div class="ui form">
 			<div class="field">
-				<label>Votre description</label>
-				<textarea name="descri" placeholder="Votre description,
-exemple: Thomas XXans region parisienne, recherche femme licorne mature et sans complexe"><% if (locals.descri) %><%= locals.descri %></textarea>
+				<label>Description</label>
+				<textarea name="descri" placeholder="exemple: Sakhile Msibi lives in JHB is a guy who loves to learn new things"><% if (locals.descri) %><%= locals.descri %></textarea>
             </div>
 			<div class="ui center">
-				<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Envoyer ">
+				<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Submit ">
             </div>
 		</div>
 		</form>

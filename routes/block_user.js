@@ -1,31 +1,31 @@
-var express = require('express'),
-	connect = require('../config/conn.js'),
-	session = require('express-session'),
-	router = express.Router()
+var conn = require('../config/conn.js');
+var express = require('express');
+var session = require('express-session');
+var router = express.Router();
 
 
 router.get('/:id', function(req, res, next) {
 	if (req.session && req.session.signin) {
 		if (req.params.id) {
-		connect.query("INSERT INTO blocked SET signin = ?, user = ?", [req.session.signin, req.params.id], (err) => {
+		conn.query("INSERT INTO blocked SET signin = ?, user = ?", [req.session.signin, req.params.id], (err) => {
 			if (err) console.log(err)
-			connect.query("DELETE FROM message WHERE user = ? AND signin = ?", [req.session.user, req.params.id], (err) => {
+			conn.query("DELETE FROM message WHERE user = ? AND signin = ?", [req.session.user, req.params.id], (err) => {
 			 if (err) console.log(err)
-			 connect.query("DELETE FROM message WHERE user = ? AND signin = ?", [req.params.id, req.session.user], (err) => {
+			 conn.query("DELETE FROM message WHERE user = ? AND signin = ?", [req.params.id, req.session.user], (err) => {
 			  if (err) console.log(err)
-			  connect.query("DELETE FROM liked WHERE user = ? AND signin = ?", [req.params.id, req.session.user], (err) => {
+			  conn.query("DELETE FROM liked WHERE user = ? AND signin = ?", [req.params.id, req.session.user], (err) => {
 			   if (err) console.log(err)
-			   connect.query("DELETE FROM liked WHERE user = ? AND signin = ?", [req.session.user, req.params.id], (err) => {
+			   conn.query("DELETE FROM liked WHERE user = ? AND signin = ?", [req.session.user, req.params.id], (err) => {
 			    if (err) console.log(err)
-				connect.query("DELETE FROM matched WHERE user = ? AND signin = ?", [req.session.user, req.params.id], (err) => {
+				conn.query("DELETE FROM matched WHERE user = ? AND signin = ?", [req.session.user, req.params.id], (err) => {
 				 if (err) console.log(err)
-				 connect.query("DELETE FROM matched WHERE user = ? AND signin = ?", [req.params.id, req.session.user], (err) => {
+				 conn.query("DELETE FROM matched WHERE user = ? AND signin = ?", [req.params.id, req.session.user], (err) => {
 				  if (err) console.log(err)
-				  connect.query("DELETE FROM notice WHERE user = ? AND signin = ?", [req.params.id, req.session.user], (err) => {
+				  conn.query("DELETE FROM notice WHERE user = ? AND signin = ?", [req.params.id, req.session.user], (err) => {
 				   if (err) console.log(err)
-				   connect.query("DELETE FROM notice WHERE user = ? AND signin = ?", [req.session.user, req.params.id], (err) => {
+				   conn.query("DELETE FROM notice WHERE user = ? AND signin = ?", [req.session.user, req.params.id], (err) => {
 				    if (err) console.log(err)
-					req.session.error = req.params.id + ' a ete block'
+					req.session.error = req.params.id + ' was blocked';
 					res.redirect('/user/' + req.params.id)
 				   })
 				  })

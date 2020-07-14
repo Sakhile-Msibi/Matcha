@@ -1,7 +1,7 @@
 var express = require('express'),
-	connect = require('../config/conn.js'),
+	conn = require('../config/conn.js'),
 	session = require('express-session'),
-	bcrypt = require('bcryptjs'),
+	bcryptjs = require('bcryptjs'),
 	router = express.Router()
 
 router.get('/', function(req, res, next) {
@@ -15,37 +15,37 @@ router.post('/', function(req, res) {
 	} else {
 	var signin = req.body.signin,
 		pswd = req.body.pswd
-	var RegexMin = /[a-z]/,
-		RegexMax = /[A-Z]/,
-		RegexMore = /[a-zA-Z-0-9\#\$\%\^\&\*\,\.]/
+	var regexSmall = /[a-z]/,
+		regexCapital = /[A-Z]/,
+		regexCharacters = /[a-zA-Z-0-9\#\$\%\^\&\*\,\.]/
 	if (signin && pswd) {
-		connect.query("SELECT * FROM user WHERE signin = ? LIMIT 1", [signin], (err, rows, result) => {
+		conn.query("SELECT * FROM user WHERE signin = ? LIMIT 1", [signin], (err, rows, result) => {
 			if (err) {
-				req.session.error = 'Le nom d\'utilisateur ou le mot de passe n\'exise pas!'
-				res.redirect('/signin')
+				req.session.error = 'The username or password is incorrect';
+				res.redirect('/signin');
 			} else if (!pswd.search(/\d/)) {
-				req.session.error = 'Le mot de passe doit contenir au moins un chiffre!'
-				res.redirect('/signin')
-			} else if (pswd.search(RegexMin) == -1) {
-				req.session.error = 'Le mot de passe doit contenir au moins une minuscule!'
-				res.redirect('/signin')
-			} else if (pswd.search(RegexMax) == -1) {
-				req.session.error = 'Le mot de passe doit contenir au moins une majuscule!'
-				res.redirect('/signin')
-			} else if (pswd.search(RegexMore) == -1) {
-				req.session.error = 'Le mot de passe ne peux pas contenir de caracteres spéciaux mise a part #, $, %, ^, &, *, ,, et . '
-				res.redirect('/signin')
+				req.session.error = 'The password must contain at least one number';
+				res.redirect('/signin');
+			} else if (pswd.search(regexSmall) == -1) {
+				req.session.error = 'The password must have at least one lower case alphabet';
+				res.redirect('/signin');
+			} else if (pswd.search(regexCapital) == -1) {
+				req.session.error = 'The password must have at least one upper case alphabet';
+				res.redirect('/signin');
+			} else if (pswd.search(regexCharacters) == -1) {
+				req.session.error = 'The password can only have these characters #, $, %, ^, &, *, ,, and . ';
+				res.redirect('/signin');
 			} else if (pswd.length < 6) {
-				req.session.error = 'Le mot de passe doit contenir au minimum 6 caracteres!'
-				res.redirect('/signin')
+				req.session.error = 'The password must have a minimum of 6 characters';
+				res.redirect('/signin');
 			} else if (pswd.length > 15) {
-				req.session.error = 'Le mot de passe doit contenir au maximum 15 caracteres!'
+				req.session.error = 'The password must have a maximum of 15 characters';
 				res.redirect('/signin')
 			} else if (rows[0]) {
-				connect.query("UPDATE user SET online = 1 WHERE signin = ?", [signin], (err) => {
+				conn.query("UPDATE user SET online = 1 WHERE signin = ?", [signin], (err) => {
 					if (err) console.log(err)
 				})
-                if (bcrypt.compareSync(pswd, rows[0].passwd)) { 
+                if (bcryptjs.compareSync(pswd, rows[0].passwd)) { 
 					req.session.signin = signin.toLowerCase()
 					if (rows[0].profilePic) {
 						req.session.ok = true
@@ -58,13 +58,13 @@ router.post('/', function(req, res) {
 						req.session.interest = rows[0].interest
 						req.session.city = rows[0].city
 						req.session.log = true
-						connect.query("UPDATE popularity SET popular = popular + 5 WHERE signin = ?", [signin], (err) => {
+						conn.query("UPDATE popularity SET popular = popular + 5 WHERE signin = ?", [signin], (err) => {
 							if (err) console.log(err)
 						})
-						connect.query("UPDATE user SET online = 1, connect = ? WHERE signin = ?", [new Date(), signin], (err) => {
+						conn.query("UPDATE user SET online = 1, connect = ? WHERE signin = ?", [new Date(), signin], (err) => {
 							if (err) threw (err)
 						})
-						req.session.success = "Vous êtes maintenant connecté"
+						req.session.success = "Welcome to Matcha";
 						res.redirect('/home')
 					} else {
 						req.session.ok = false
@@ -74,29 +74,29 @@ router.post('/', function(req, res) {
 						req.session.interest = rows[0].interest
 						req.session.city = rows[0].city
 						req.session.age = rows[0].age
-						req.session.info = 'Veuillez remplir vos informations personnelles.'
-						connect.query("UPDATE user SET online = 1, connect = ? WHERE signin = ?", [new Date(), signin], (err) => {
+						req.session.info = 'Please fill in your presonal information';
+						conn.query("UPDATE user SET online = 1, connect = ? WHERE signin = ?", [new Date(), signin], (err) => {
 							if (err) threw (err)
 						})
 
-						req.session.success = "Vous êtes maintenant connecté"
+						req.session.success = "Welcome to Matcha";
 						req.session.log = true
 						res.redirect('/profile')
 					}
 				} else {
-					req.session.error = 'Le mot de passe ou le nom d\'utilisateur n\'existe pas.'
-					res.redirect('/signin')
+					req.session.error = 'The username or password is incorrect';
+					res.redirect('/signin');
 				}
 			} else {
-				req.session.error = 'Le nom d\'utilisateur ou le mot de passe n\'exise pas.'
-				res.redirect('/signin')
+				req.session.error = 'The username or password is incorrect';
+				res.redirect('/signin');
 			}
-		})
+		});
 	} else {
-		req.session.error = 'Please complete all fields.'
-		res.redirect('/signin')
+		req.session.error = 'Please fill in all the rquired details';
+		res.redirect('/signin');
 	}
-	}
-})
+}
+});
 
-module.exports = router
+module.exports = router;

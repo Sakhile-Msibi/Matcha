@@ -1,8 +1,8 @@
-var express = require('express'),
-	connect = require('../config/conn.js'),
-	session = require('express-session'),
-	bodyP = require('body-parser'),
-	router = express.Router()
+var conn = require('../config/conn.js');
+var express = require('express');
+var session = require('express-session');
+var bodyParser = require('body-parser');
+var router = express.Router();
 
 router.get('/', function(req, res, next) {
 	res.render('/profile', { title: 'Express' })
@@ -13,10 +13,10 @@ router.get('/tag/:tag', function(req, res) {
 	if (req.session && req.session.signin) {
 		var tag = req.params.tag
 		if (tag) {
-			connect.query("SELECT tag from tag WHERE signin = ? AND tag = ?", [req.session.signin, tag], (err, rows, result) => {
+			conn.query("SELECT tag from tag WHERE signin = ? AND tag = ?", [req.session.signin, tag], (err, rows, result) => {
 				if (err) console.log(err)
 				if (rows[0].tag) {
-					connect.query("DELETE from tag WHERE tag = ? AND signin = ?", [tag, req.session.signin], (err) => {
+					conn.query("DELETE from tag WHERE tag = ? AND signin = ?", [tag, req.session.signin], (err) => {
 						if (err) console.log(err)
 						req.session.success = 'The tag has been deleted from your profile';
 						res.redirect('/profile')
