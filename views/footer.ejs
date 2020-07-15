@@ -29,12 +29,21 @@
 		<% } else  { %>
 			<script>
 				var socket = io.connect()
+<<<<<<< HEAD
 				var parse = '<%- locals.login %>'
 				socket.emit('parse', {
 					login	: parse
 				})
 
 				socket.on('notif', function() {
+=======
+				var parse = '<%- locals.signin %>'
+				socket.emit('parse', {
+					signin	: parse
+				})
+
+				socket.on('notice', function() {
+>>>>>>> 24fde18b2ec5a30375acf21a9993b93d4bb66971
 					$('#testt').append("<div class='floating ui red label' style='top:10px;'>!</div>");
 				})
 

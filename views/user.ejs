@@ -12,7 +12,11 @@
 			<% if (mainpic1) { %>
 				<img alt="User Pic" src="../images/upload_images/<%=mainpic1%>" class="ui medium circular image">	
 			<% } else { %>
+<<<<<<< HEAD
 				<img class="ui medium circular image" src="../images/profil/steve.jpg">
+=======
+				<img class="ui medium circular image" src="../images/profile/lio.jpg">
+>>>>>>> 24fde18b2ec5a30375acf21a9993b93d4bb66971
 			<% } %>
 			<% if (login2 != mine) { %>
 				<% if (locals.liked == "ok") { %>
@@ -35,6 +39,7 @@
     <div class="column">
 		<div class="ui segment">
 			<% if (online == 1) { %>
+<<<<<<< HEAD
 				<div class="ui teal empty circular label"></div> En Ligne
 			<% } else { %>
 				<div class="ui red empty circular label"></div> Hors Ligne - last log : <%= connected %>
@@ -60,6 +65,33 @@
 			<div class="ui statistic">
 				<div class="value"style="color:gold">
 					<i class="trophy icon" style="color:gold"></i> <%= famous %>
+=======
+				<div class="ui teal empty circular label"></div> Online
+			<% } else { %>
+				<div class="ui red empty circular label"></div> Offline - last log : <%= connected %>
+			<% } %>
+			<hr class="ui">
+				<div class="ui large header" style="color:white"> <%= name + ' ' + surname %> </div>
+			<% if (gender == "male") { %>
+				<p>
+					Men, <%= age %>ans
+				</p>
+			<% } else if (gender == "female") { %>
+				<p>
+					Women, <%= age %>ans
+				</p>
+			<% } %>
+			<% if (interest == "male") { %>
+				<p> Interested in: &nbsp; Men <p>
+			<% } else if (interest == "female") { %>
+				<p> Interested in: &nbsp; Women <p>
+			<% } else if (interest == "both") { %>
+				<p> Interested in: &nbsp; Both <p>
+			<% } %>
+			<div class="ui statistic">
+				<div class="value"style="color:gold">
+					<i class="trophy icon" style="color:gold"></i> <%= popular %>
+>>>>>>> 24fde18b2ec5a30375acf21a9993b93d4bb66971
 				</div>
 				<div class="label" style="color:white">
 					Popularity
@@ -97,18 +129,32 @@
 	<br>
 	<br>
 		<% if (blocked == "no") { %>
+<<<<<<< HEAD
 			<a href="/block/<%= login2 %>">
 				<button class="negative ui button">Block user</button>
 			</a>
 		<% } else { %>
 			<a href="/unblock/<%= login2 %>">
 				<button class="postive ui button">UnBlock user</button>
+=======
+			<a href="/block_user/<%= login2 %>">
+				<button class="negative ui button">Block user</button>
+			</a>
+		<% } else { %>
+			<a href="/unblock_user/<%= login2 %>">
+				<button class="postive ui button">unblock_user user</button>
+>>>>>>> 24fde18b2ec5a30375acf21a9993b93d4bb66971
 			</a>
 		<% } %>
 	<br>
 	<br>
+<<<<<<< HEAD
 		<a href="/fake/<%= login2 %>">
 			<button class="negative ui button">Report as fake</button>
+=======
+		<a href="/catfish/<%= login2 %>">
+			<button class="negative ui button">Report as catfish</button>
+>>>>>>> 24fde18b2ec5a30375acf21a9993b93d4bb66971
 		</a>
 	
 	<% } %>
@@ -121,37 +167,65 @@
 	<div class="ui four doubling cards">
   <div class="card">
     <div class="image">
+<<<<<<< HEAD
 		<% if (!pic1) { %>
 			<img src="/images/profil/steve.jpg">
 		<% } else { %>
 			<img src="/images/upload_images/<%=pic1%>">
+=======
+		<% if (!photo1) { %>
+			<img src="/images/profile/lio.jpg">
+		<% } else { %>
+			<img src="/images/upload_images/<%=photo1%>">
+>>>>>>> 24fde18b2ec5a30375acf21a9993b93d4bb66971
 		<% } %>
     </div>
   </div>
   <div class="card">
     <div class="image">
+<<<<<<< HEAD
 		<% if (!pic2) { %>
 			<img src="/images/profil/steve.jpg">
 		<% } else { %>
 			<img src="/images/upload_images/<%=pic2%>">
+=======
+		<% if (!photo2) { %>
+			<img src="/images/profile/lio.jpg">
+		<% } else { %>
+			<img src="/images/upload_images/<%=photo2%>">
+>>>>>>> 24fde18b2ec5a30375acf21a9993b93d4bb66971
 		<% } %>
     </div>
   </div>
   <div class="card">
     <div class="image">
+<<<<<<< HEAD
 		<% if (!pic3) { %>
 			<img src="/images/profil/steve.jpg">
 		<% } else { %>
 			<img src="/images/upload_images/<%=pic3%>">
+=======
+		<% if (!photo3) { %>
+			<img src="/images/profile/lio.jpg">
+		<% } else { %>
+			<img src="/images/upload_images/<%=photo3%>">
+>>>>>>> 24fde18b2ec5a30375acf21a9993b93d4bb66971
 		<% } %>
     </div>
   </div>
   <div class="card">
     <div class="image">
+<<<<<<< HEAD
 		<% if (!pic4) { %>
 			<img src="/images/profil/steve.jpg">
 		<% } else { %>
 			<img src="/images/upload_images/<%=pic4%>">
+=======
+		<% if (!photo4) { %>
+			<img src="/images/profile/lio.jpg">
+		<% } else { %>
+			<img src="/images/upload_images/<%=photo4%>">
+>>>>>>> 24fde18b2ec5a30375acf21a9993b93d4bb66971
 		<% } %>
     </div>
   </div>
