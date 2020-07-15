@@ -1,0 +1,58 @@
+<% include header %> 
+
+<div id="wrapper">
+<div id="page-content-wrapper">
+<div class="container-fluid">
+
+<!-- FORM -->
+<div class="ui raised very padded text container segment">
+	<h4>Edit your profile</h4>
+	<hr>
+	<div class="field example">
+		<img src="images/matcha1.png" class="logoform">
+		<form class="ui form segment" method="post" action="/user_edit">
+			<div class="tag">
+			<% if (tag) { %>
+				<% tag.forEach(function(element) { %>
+					<% var tag = element["tag"] %>
+					<a class="ui label">
+						<%= element["tag"] %>
+						<a class="tagdel" href="user_edit/tag/<%= tag %>">
+							<i class="delete icon"></i>
+						</a>
+					</a>
+				<% }) %>
+			<% } %>
+			</div>
+			<br>
+			<div class="field">
+				<label>Entrez vos hobbies ou interets</label>
+				<input type="text" name="tag" placeholder="exemple: musculation">
+			</div>
+			<div class="ui center">
+				<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Envoyer ">
+            </div>
+		</form>
+		<hr>
+		<form class="ui form segment" method="post" action="/user_edit/des">
+		<div class="ui form">
+			<div class="field">
+				<label>Votre description</label>
+				<textarea name="descri" placeholder="Votre description,
+exemple: Thomas XXans region parisienne, recherche femme licorne mature et sans complexe"><% if (locals.descri) %> locals.descri %></textarea>
+            </div>
+			<div class="ui center">
+				<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Envoyer ">
+            </div>
+		</div>
+		</form>
+	</div>
+</div>
+
+</div>
+</div>
+<!-- /#page-content-wrapper -->
+</div>
+
+
+<% include footer %>

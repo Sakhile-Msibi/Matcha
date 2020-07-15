@@ -1,43 +1,41 @@
 {
   "name": "matcha",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "version": "0.0.0",
+  "title": "meet[her]",
+  "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon ./bin/www"
   },
-  "author": {
-    "name": "smsibi",
-    "email": "thembinkosimsibi198@gmail.com",
-    "url": "https://github.com/Sakhile-Msibi/Matcha"
-  },
-  "license": "ISC",
   "dependencies": {
     "age-calculator": "^1.0.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
-    "connect-redis": "^4.0.4",
-    "cookie-parser": "^1.4.5",
-    "debug": "^4.1.1",
+    "connect-redis": "^3.3.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "^2.6.9",
     "ejs": "~2.5.7",
     "express": "^4.17.1",
-    "express-fileupload": "^1.1.7-alpha.3",
+    "express-fileupload": "^0.2.0",
     "express-session": "^1.17.1",
-    "http": "0.0.1-security",
-    "iplocation": "^7.2.0",
+    "http": "0.0.0",
+    "iplocation": "^5.0.0",
     "moment": "^2.27.0",
     "morgan": "^1.10.0",
-    "mysql": "^2.18.1",
+    "mysql": "~2.14.1",
     "node-mailer": "^0.1.1",
-    "nodemon": "^2.0.4",
-    "parse": "^2.14.0",
-    "redis": "^3.0.2",
+    "nodemon": "^1.11.0",
+    "parse": "^1.10.0",
+    "redis": "^2.8.0",
     "regex-email": "^1.0.2",
-    "req-flash": "0.0.3",
     "serve-favicon": "^2.5.0",
-    "socket.io": "^2.3.0",
+    "socket.io": "^2.0.3",
     "socket.io.session": "^1.0.13",
     "update": "^0.7.4"
+  },
+  "homepage": "http://localhost:8080/index.html",
+  "author": "thgiraud",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wickedpool/matcha.git"
   }
 }

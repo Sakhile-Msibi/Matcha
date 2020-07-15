@@ -1,125 +1,125 @@
-var conn = require('../config/conn.js');
-var express = require('express');
-var session = require('express-session');
-var bcryptjs = require('bcryptjs');
-var parse = require('parse').parse;
-var iplocation = require('iplocation');
-var ageCalc = require('age-calculator');
-var regexMail = require('regex-email');
-var router = express.Router();	
+var 	express = require('express'),
+		connect = require('../config/database.js'),
+		session = require('express-session'),
+		regex = require('regex-email'),
+		bcrypt = require('bcryptjs'),
+		iplocation = require('iplocation'),
+		ageCalculator = require('age-calculator'),
+		parse = require('parse').parse,
+		router = express.Router()
 
-var {AgeFromDateString, AgeFromDate} = require('age-calculator');
-const code = 10;
+var {AgeFromDateString, AgeFromDate} = require('age-calculator')
+const	salt = 10
 
 router.post('/', function(req, res) {
-	var signin = req.body.signin;
-	var name = req.body.name;
-	var surname = req.body.surname;
-	var email = req.body.email;
-	var gender = req.body.gender;
-	var city = req.body.city;
-	var age = new AgeFromDateString(req.body.age).age;
-	var	pswd = req.body.pswd;
-	var	repswd = req.body.repswd;
-	var	interest = req.body.interest;
-	var regexSmall = /[a-z]/;
-	var	regexCapital = /[A-Z]/;
-	var	regexSC = /[a-zA-Z]/;
-	var	regexAlphanumeric = /[a-zA-Z0-9]/;
-	var	regexchar = /[a-zA-Z-0-9\#\$\%\^\&\*\,\.]/;
-	var	regexDate = /^\d\d\d\d-(0[1-9]|1[0-2])-(0[1-9]|[1-2]\d|3[0-1])$/;
-	var	hash = bcryptjs.hashSync(pswd, code);
-	if (signin && name && surname && email && age && gender && city && pswd && repswd) {
-		conn.query("SELECT * FROM user WHERE signin = ? OR email = ?", [signin, email], (err, rows, result) => {
+	var	login = req.body.login,
+		name = req.body.name,
+		lastname = req.body.lastname,
+		email = req.body.email,
+		gender = req.body.gender,
+		city = req.body.city,
+		age = new AgeFromDateString(req.body.age).age
+		pswd = req.body.pswd,
+		repswd = req.body.repswd,
+		interest = req.body.interest
+	var RegexMin = /[a-z]/,
+		RegexMax = /[A-Z]/,
+		RegexBoth = /[a-zA-Z]/,
+		RegexAll = /[a-zA-Z0-9]/,
+		RegexMore = /[a-zA-Z-0-9\#\$\%\^\&\*\,\.]/,
+		RegexDate = /^\d\d\d\d-(0[1-9]|1[0-2])-(0[1-9]|[1-2]\d|3[0-1])$/
+	var	hash = bcrypt.hashSync(pswd, salt)
+	if (login && name && lastname && email && age && gender && city && pswd && repswd) {
+		connect.query("SELECT * FROM user WHERE login = ? OR email = ?", [login, email], (err, rows, result) => {
 			if (err) {
-				req.session.error = 'An error has occurred';
-				res.redirect('/');
+				req.session.error = 'Une erreur est survenue.'
+				res.redirect('/')
 			}
-    		if (signin.length > 60 || email.length > 150 || surname.length > 60 || name.length > 60) {
-	    		req.session.error = 'Field is too long';
-		    	res.redirect('/');
-    		} else if (!regexMail.test(email)) {
-	    		req.session.error = 'Invalid email!';
-		    	res.redirect('/');
-    		} else if (signin.search(regexAlphanumeric)) {
-	    		req.session.error = 'This field must only contain alphabets and numbers';
-		    	res.redirect('/');
-	    	} else if (name.search(regexSC) || surname.search(regexSC)) {
-		    	req.session.error = 'The field must only contain alphabets';
-			    res.redirect('/');
-    		} else if (city.search(regexSC)) {
-	    		req.session.error = 'This field must only contain alphabets';
-		    	res.redirect('/');
-    		} else if (pswd != repswd) {
-	    		req.session.error = 'Passwords must be the same';
-		    	res.redirect('/');
-	    	} else if (!pswd.search(/\d/)) {
-		    	req.session.error = 'The password must contain at least one number';
-			    res.redirect('/');
-		    } else if (pswd.search(regexSmall) == -1) {
-			    req.session.error = 'The password must contain at least one small letter';
-    			res.redirect('/');
-	    	} else if (pswd.search(regexCapital) == -1) {
-		    	req.session.error = 'The password must contain at least one capital letter';
-			    res.redirect('/');
-	    	} else if (pswd.search(regexchar) == -1) {
-		    	req.session.error = 'The password can only have the following characters #, $, %, ^, &, *, ,, and . ';
-			    res.redirect('/');
-	    	} else if (pswd.length < 6) {
-		    	req.session.error = 'The password must have at least 6 characters';
-			    res.redirect('/');
-    		} else if (req.body.age.search(regexDate)) {
-	    		req.session.error = 'The date format is not valid';
-		    	res.redirect('/');
-    		} else if (name.length < 3 || surname.length < 3) {
-	    		req.session.error = 'Name and surname must not be less than 3 characters';
-		    	res.redirect('/');
-    		} else if (pswd.length > 15) {
-	    		req.session.error = 'The password must have less than 15 characters';
-		    	res.redirect('/');
-    		} else if (rows[0] && rows[0]['email']) {
-	    		req.session.error = 'The email is already in use';
-		    	res.redirect('/');
-    		} else if (rows[0] && rows[0]['signin']) {
-	    		req.session.error = "The username is already in use";
-		    	res.redirect('/');
-    		} else if (age < 18) {
-	    		req.session.error = "You are too young";
-		    	res.redirect('/');
-    		} else {
+		if (login.length > 60 || email.length > 150 || lastname.length > 60 || name.length > 60) {
+			req.session.error = 'Champ trop long!'
+			res.redirect('/')
+		} else if (!regex.test(email)) {
+			req.session.error = 'Format email invalide!'
+			res.redirect('/')
+		} else if (login.search(RegexAll)) {
+			req.session.error = 'Le login ne peux comporter que des caracteres de A a Z et des chiffres!'
+			res.redirect('/')
+		} else if (name.search(RegexBoth) || lastname.search(RegexBoth)) {
+			req.session.error = 'Votre nom ne peux pas contenir de caracteres autres que l\'alphabet meme si vous avez un nom composé!'
+			res.redirect('/')
+		} else if (city.search(RegexBoth)) {
+			req.session.error = 'Le nom de votre ville ne peux pas comporter d\'accents, ou autre caractere speciaux!'
+			res.redirect('/')
+		} else if (pswd != repswd) {
+			req.session.error = 'Les mots de passe ne sont pas identiques!'
+			res.redirect('/')
+		} else if (!pswd.search(/\d/)) {
+			req.session.error = 'Le mot de passe doit contenir au moins un chiffre!'
+			res.redirect('/')
+		} else if (pswd.search(RegexMin) == -1) {
+			req.session.error = 'Le mot de passe doit contenir au moins une minuscule!'
+			res.redirect('/')
+		} else if (pswd.search(RegexMax) == -1) {
+			req.session.error = 'Le mot de passe doit contenir au moins une majuscule!'
+			res.redirect('/')
+		} else if (pswd.search(RegexMore) == -1) {
+			req.session.error = 'Le mot de passe ne peux pas contenir de caracteres spéciaux mise a part #, $, %, ^, &, *, ,, et . '
+			res.redirect('/')
+		} else if (pswd.length < 6) {
+			req.session.error = 'Le mot de passe doit contenir au minimum 6 caracteres!'
+			res.redirect('/')
+		} else if (req.body.age.search(RegexDate)) {
+			req.session.error = 'Le format de la date n\'est pas valide!'
+			res.redirect('/')
+		} else if (name.length < 3 || lastname.length < 3) {
+			req.session.error = 'Le nom fait moins de 2 caracteres'
+			res.redirect('/')
+		} else if (pswd.length > 15) {
+			req.session.error = 'Le mot de passe doit contenir au maximum 15 caracteres!'
+			res.redirect('/')
+		} else if (rows[0] && rows[0]['email']) {
+			req.session.error = 'L\'email est déjà utilisé'
+			res.redirect('/')
+		} else if (rows[0] && rows[0]['login']) {
+			req.session.error = "Le nom d'utilisateur est déjà utilisé"
+			res.redirect('/')
+		} else if (age < 18) {
+			req.session.error = "Vous etes trop jeune"
+			res.redirect('/')
+		} else {
 			var datarand = "t" + Math.random(555, 9560)
-			conn.query('INSERT INTO popularity SET signin = ?, popular = 5', [signin], (err, rows, result) => {
+			connect.query('INSERT INTO popularity SET login = ?, famous = 5', [login], (err, rows, result) => {
 				if (err) console.log(err)
-				conn.query('INSERT INTO user SET signin = ?, name = ?, surname = ?, email = ?, passwd = ?, register = ?, age = ?, gender = ?, city = ?, interest = ?, hash = ?', [signin, name, surname, email, hash, new Date(), age, gender, city, interest, datarand], (err, rows, result) => {
+				connect.query('INSERT INTO user SET login = ?, name = ?, lastname = ?, email = ?, passwd = ?, register = ?, age = ?, sexe = ?, city = ?, interest = ?, hash = ?', [login, name, lastname, email, hash, new Date(), age, gender, city, interest, datarand], (err, rows, result) => {
 					if (err) {
 						console.log(err)
-						req.session.error = 'An error has occurred';
+						req.session.error = 'Une erreur est survenue. :)'
 						res.redirect('/')
 					} else {
 						iplocation(req.ip, function(error, res) {
 							if (res && res['city']) {
-								conn.query('UPDATE user SET latitude = ?, longitude = ? WHERE signin = ?', res['latitude'], res['longitude'], [signin], (err) => {
+								connect.query('UPDATE user SET latitude = ?, longitude = ? WHERE login = ?', res['latitude'], res['longitude'], [login], (err) => {
 									if (err) console.log(err)
 								})
 							} else {
-								conn.query('UPDATE user SET city = "Paris", latitude = 48.8965, longitude = 2.3182 WHERE signin = ?', [signin], (err) => {
+								connect.query('UPDATE user SET city = "Paris", latitude = 48.8965, longitude = 2.3182 WHERE login = ?', [login], (err) => {
 									if (err) console.log(err)
 								})
 							}
 						})
 					}
-					var s = 'Thank you, Welcome to Matcha ';
-					s += signin
+					var s = 'Le formulaire a bien été rempli, bienvenue sur Matcha '
+					s += login
 					req.session.success = s
-					res.redirect('/signin')
-				});
-			});
+					res.redirect('/login')
+				})
+			})
 		}
-		});
+		})
 	} else {
-		req.session.error = 'Please complete all fields.';
-		res.redirect('/');
+		req.session.error = 'Veuillez remplir tous les champs.'
+		res.redirect('/')
 	}
-});
+})
 
-module.exports = router;
+module.exports = router

@@ -38,40 +38,40 @@
 				<div class="ui inverted fixed menu navbar page grid">
 					<% if (locals.ok) { %>
 						<a href="/home" class="brand item">
-							<img src="/images/matcha1.jpg" alt="">
+							<img src="/images/matcha1.png" alt="">
 						</a>
 					<% } else { %>
 						<a href="#" class="brand item">
-							<img src="/images/matcha1.jpg" alt="">
+							<img src="/images/matcha1.png" alt="">
 						</a>
 					<% } %>
-					<% if (locals && locals.signin) { %>
+					<% if (locals && locals.login) { %>
 					<div class="right menu">
 						<% if (locals.ok) { %>
 							<a href="/message" class="item">
 								<i class="talk icon"></i>
 							</a>
-							<a href="/notice" class="item">
+							<a href="/notif" class="item">
 								<i class="world icon" id='testt'></i>
 								<% if (locals && locals.cheecked) { %>
 									<div class="floating ui red label" style="top:10px;">!</div>
 								<% } %>
 							</a>
-							<a href="/search_user" class="item">
+							<a href="/search" class="item">
 								<i class="search icon"></i>
 							</a>
 						<% } %>
-						<% if (locals.profilePic) { %>
-						<a href='/profile' class="item"><img class="ui right spaced avatar image" src="/images/upload_images/<%=locals.profilePic%>"> <%= locals.signin %> </a>
+						<% if (locals.mainpic) { %>
+						<a href='/profil' class="item"><img class="ui right spaced avatar image" src="/images/upload_images/<%=locals.mainpic%>"> <%= locals.login %> </a>
 						<% } else { %>
-						<a href='/profile' class="item"><img class="ui right spaced avatar image" src="/images/profile/Thabo.jpg"> <%= locals.signin %> </a>
+						<a href='/profil' class="item"><img class="ui right spaced avatar image" src="/images/profil/elliot.jpg"> <%= locals.login %> </a>
 						<% } %>
-						<a href="/signout" onclick="io.disconnect()" class="item">signout</a>
+						<a href="/logout" onclick="io.disconnect()" class="item">Deconnexion</a>
 					</div>
 					<% } else { %>
 					<div class="right menu">
-						<a href="/forgot_password" class="item">
-							Forgot password?
+						<a href="/forgot" class="item">
+							Mot de passe oublié
 						</a>
 					</div>
 					<% } %>
@@ -80,7 +80,7 @@
 			<div class="mobile only row">
 				<div class="ui fixed inverted navbar menu">
 					<a href="#" class="brand item">
-						<img src="/images/matcha1.jpg" class="">
+						<img src="/images/matcha1.png" class="">
 					</a>
 					<div class="right menu open">
 						<a href="#" class="menu item">

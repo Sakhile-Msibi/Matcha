@@ -11,7 +11,7 @@
 	<h4>Tell Us About Yourself</h4>
 	<hr>
 	<div class="field example">
-		<img src="images/matcha1.jpg" class="logoform">
+		<img src="images/matcha1.png" class="logoform">
 		<form class="ui form segment" id="loginform" method="post" action="/register">
 			<div class="two fields">
 				<div class="field">
@@ -39,8 +39,8 @@
 			</div>
 			<div class="two fields">
 				<div class="field">
-					<label>surname</label>
-					<input placeholder="surname" name="surname" type="text" id="surname">
+					<label>Lastname</label>
+					<input placeholder="Lastname" name="lastname" type="text" id="lastname">
 				</div>
 				<div class="field">
 					<label>Email</label>
@@ -49,8 +49,8 @@
 			</div>
 			<div class="two fields">
 				<div class="field">
-					<label>signin</label>
-					<input placeholder="signin" name="signin" type="text" id="signin">
+					<label>Login</label>
+					<input placeholder="Login" name="login" type="text" id="login">
 				</div>
 				<div class="field">
 					<label>City</label>
@@ -92,13 +92,13 @@
 				</div>
 			</div>
 			<div class="ui center">
-				<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Submit ">
+				<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Envoyer ">
             </div>
 			<div class="ui error message"></div>
 		</form>
 	</div>
 	<hr>
-	<center><a href="/signin">I am already a member</a></center>
+	<center><a href="/login">Je suis déjà membre</a></center>
 </div>
 
 </div>
@@ -135,12 +135,12 @@
 			  }
 			]
 		},
-		surname: {
-			identifier: 'surname',
+		lastname: {
+			identifier: 'lastname',
 			rules: [
 			  {
 				type   : 'empty',
-				prompt : 'Please enter your surname'
+				prompt : 'Please enter your lastname'
 			  }
 			]
 		},
@@ -153,12 +153,12 @@
 			  }
 			]
 		},
-		signin: {
-			identifier: 'signin',
+		login: {
+			identifier: 'login',
 			rules: [
 			  {
 				type   : 'empty',
-				prompt : 'Please enter your signin'
+				prompt : 'Please enter your login'
 			  }
 			]
 		},
