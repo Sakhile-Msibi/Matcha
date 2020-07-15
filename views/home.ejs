@@ -28,11 +28,7 @@
 	</div>
 	<br/>
 	<div class="field">
-<<<<<<< HEAD
-		<a href="/home/famous">
-=======
 		<a href="/home/popular">
->>>>>>> 24fde18b2ec5a30375acf21a9993b93d4bb66971
 			<button type="submit" class="ui red button" style="display:block;margin:auto">
 				<i class="star icon"></i> Popularity
 			</button>
@@ -54,26 +50,11 @@
 	<div class="ui negative message">
 		<i class="close icon"></i>
 		<div class="header">
-<<<<<<< HEAD
-			IL N'Y A PAS D'UTILISATEURS QUI POURRAIENT VOUS INTERRESSER
-=======
 			Please improve your profile
->>>>>>> 24fde18b2ec5a30375acf21a9993b93d4bb66971
 		</div>
 	</div>
 <% } else { %>
 	<% profile.forEach(function(element) { %>
-<<<<<<< HEAD
-	<% var pic = element["mainpic"] %>
-	<% var name = element["name"] %>
-	<% var lname = element["lastname"] %>
-	<% var sexe = element["sexe"] %>
-	<% var age = element["age"] %>
-	<% var descri = element["description"] %>
-	<% var login = element["login"] %>
-	<% if (skip1 != login && skip2 != login && skip != login) { %>
-	<a href="/user/<%= login %>">
-=======
 	<% var pic = element["profilePic"] %>
 	<% var name = element["name"] %>
 	<% var lname = element["surname"] %>
@@ -83,7 +64,6 @@
 	<% var signin = element["signin"] %>
 	<% if (skip1 != signin && skip2 != signin && skip != signin) { %>
 	<a href="/user/<%= signin %>">
->>>>>>> 24fde18b2ec5a30375acf21a9993b93d4bb66971
 		<div class="ui people shape">
 		<div class="sides">
 			<div class="side active">
@@ -94,11 +74,7 @@
 					<div class="content">
 						<div class="header"><%= name %> <%= lname %></div>
 							<div class="meta">
-<<<<<<< HEAD
-								<%= sexe %>, <%= age %> ans
-=======
 								<%= gender %>, <%= age %> ans
->>>>>>> 24fde18b2ec5a30375acf21a9993b93d4bb66971
 							</div>
 							<div class="description">
 								<%= descri %>
@@ -106,11 +82,7 @@
 						</div>
 						<div class="extra content">
 							<span class="right floated">
-<<<<<<< HEAD
-							Joined in 2017
-=======
 							Joined in 2020
->>>>>>> 24fde18b2ec5a30375acf21a9993b93d4bb66971
 							</span>
 							<span>
 						</div>

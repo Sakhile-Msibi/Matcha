@@ -32,14 +32,9 @@ router.post('/', function(req, res, next) {
 						to: mail,
 						from: 'thembinkosimsibi198@gmail.com',
 						subject: 'Matcha Password Reset',
-						text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
-						'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-<<<<<<< HEAD
-						'http://localhost:3000' + '/password_reset/' + hash + '\n\n' +
-=======
+						text: 'Here is the link to change your matcha password ' +
 						'http://localhost:8080' + '/password_reset/' + hash + '\n\n' +
->>>>>>> 24fde18b2ec5a30375acf21a9993b93d4bb66971
-						'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+						'If you did not request this, please ignore this email.\n'
 					}
 					smtpTransport.sendMail(mailOptions, function(err) {
 						if (err) console.log(err)

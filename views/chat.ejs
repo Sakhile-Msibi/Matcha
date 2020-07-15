@@ -14,15 +14,9 @@ message = '';
 	<hr>
 	<div class="TEXTO">
 	<% message.forEach(function(element) { %>
-<<<<<<< HEAD
-		<% var name = element["login"] %>
-		<% var message = element["message"] %>
-		<% var date = element["sendat"] %>
-=======
 		<% var name = element["signin"] %>
 		<% var message = element["message"] %>
 		<% var date = element["sendDate"] %>
->>>>>>> 24fde18b2ec5a30375acf21a9993b93d4bb66971
 		<% if (name == talkto) { %>
 			<div id="mesages">
 			<div class="ui comments" id="msgtpl" style="border: 14px solid grey;background: grey;border-radius: 10px;margin-bottom:3px">
@@ -66,11 +60,7 @@ message = '';
 		<input type="text" class="message" id="message" maxlength="160" class="text"/>
 		<input type="hidden" id="recup" value="<%=talkto %>" class="text"/>
 		<input type="hidden" id="usr" value="<%=me %>" class="text"/>
-<<<<<<< HEAD
-		<input type="submit" class="ui primary submit button send" value="Envoyer" class="submit"/>
-=======
 		<input type="submit" class="ui primary submit button send" value="Submit" class="submit"/>
->>>>>>> 24fde18b2ec5a30375acf21a9993b93d4bb66971
 	</form>
 </div>
 

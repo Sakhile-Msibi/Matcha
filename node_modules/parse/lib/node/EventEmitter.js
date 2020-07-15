@@ -1,5 +1,4 @@
-'use strict';
-
+"use strict";
 /**
  * Copyright (c) 2015-present, Parse, LLC.
  * All rights reserved.
@@ -12,4 +11,3 @@
  */
 
 module.exports = require('events').EventEmitter;
-var EventEmitter;

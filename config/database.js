@@ -1,18 +1,3 @@
-<<<<<<< HEAD
-let mysql = require('mysql');
-
-let connexion = mysql.createConnection({
-	host	 : 'localhost',
-	port	 : 3306,
-	user	 : 'root',
-	database : 'matcha',
-	password : 'Sakhile198'
-});
-
-connexion.connect();
-
-module.exports = connexion;
-=======
 //connection
 
 var mysql      = require('mysql');
@@ -71,7 +56,9 @@ connection.query('CREATE TABLE IF NOT EXISTS user ('
 	+ 'latitude FLOAT,'
 	+ 'longitude FLOAT,'
 	+ 'hash VARCHAR(255),'
-	+ 'connect DATETIME)', function(err) {
+	+ 'connect DATETIME,'
+	+ 'token VARCHAR(255),'
+	+ 'verified TINYINT(4))', function(err) {
 	if (err) throw err;
 	else {
 		console.log('Table user created !');
@@ -238,4 +225,3 @@ console.log("table popularity filled")
 
 //End of connection
 connection.end();
->>>>>>> 24fde18b2ec5a30375acf21a9993b93d4bb66971

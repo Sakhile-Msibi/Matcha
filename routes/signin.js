@@ -19,20 +19,10 @@ router.post('/', function(req, res) {
 		regexCapital = /[A-Z]/,
 		regexCharacters = /[a-zA-Z-0-9\#\$\%\^\&\*\,\.]/
 	if (signin && pswd) {
-<<<<<<< HEAD
-		conn.query("SELECT * FROM user WHERE signin = ? AND verification = TRUE LIMIT 1", [signin], (err, rows, result) => {
-			if (err) {
-				req.session.error = 'The username or password is incorrect';
-				res.redirect('/signin');
-			} else if (!user.verification) {
-				req.session.error = 'Please confirm your account to signin';
-				res.redirect('/signin');
-=======
 		conn.query("SELECT * FROM user WHERE signin = ? LIMIT 1", [signin], (err, rows, result) => {
 			if (err) {
 				req.session.error = 'The username or password is incorrect';
 				res.redirect('/signin');
->>>>>>> 24fde18b2ec5a30375acf21a9993b93d4bb66971
 			} else if (!pswd.search(/\d/)) {
 				req.session.error = 'The password must contain at least one number';
 				res.redirect('/signin');
