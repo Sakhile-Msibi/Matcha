@@ -1,0 +1,39 @@
+<% include header %>
+
+<div class="ui raised very padded text container segment">
+<div class="container-fluid">
+<h4>Welcome to Matcha</h4>
+<hr>
+	<img src="images/matcha1.jpg" class="logoform">
+<form class="ui form segment" id="logged" method="post" action="/signin">
+	<div class="field">
+		<label>Username</label>
+		<input type="text" name="signin" id="signin" placeholder="signin">
+	</div>
+	<div class="field">
+		<label>Password</label>
+		<input type="password" name="pswd" id="pswd" placeholder="Password">
+	</div>
+	<br>
+	<div class="ui center">
+		<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Submit ">
+	</div>
+</form>
+</div>
+	<hr>
+	<center><a href="/">Register</a></center>
+</div>
+
+<% include footer %>
+
+<script>
+
+var socket = io.connect();
+
+$('#logged').submit(function(event) {
+	socket.emit('log', {
+		signin	: $('#signin').val()
+	})
+})
+
+</script>

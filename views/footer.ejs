@@ -1,0 +1,45 @@
+		<!-- jQuery -->
+		<script src="../javascripts/jquery.js"></script>
+
+		<!-- semantic -->
+		<script src="../semantic/semantic.min.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+
+		<script>
+			$("#menu-toggle").click(function(e) {
+				e.preventDefault()
+				$("#wrapper").toggleClass("toggled")
+			})
+
+			$(document).ready(function(){
+				$('.right.menu.open').on("click",function(e){
+					e.preventDefault()
+					$('.ui.vertical.menu').toggle()
+				})
+
+				$('.ui.dropdown').dropdown()
+			})
+		</script>
+
+		<% if (!locals.log) { %>
+			<script>
+				var socket = "tchi"
+			</script>
+		<% } else  { %>
+			<script>
+				var socket = io.connect()
+				var parse = '<%- locals.signin %>'
+				socket.emit('parse', {
+					signin	: parse
+				})
+
+				socket.on('notice', function() {
+					$('#testt').append("<div class='floating ui red label' style='top:10px;'>!</div>");
+				})
+
+			</script>
+		<% } %>
+	</body>
+
+</html>

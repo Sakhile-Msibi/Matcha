@@ -1,0 +1,90 @@
+<% include header %>
+<meta http-equiv="refresh" content="5;" url="/chat/<%= talkto %>" />
+<script>
+var message;
+if (global.localStorage.getItem('message') !== '') {
+	message = global.localStorage.getItem('message');
+} else {
+message = '';
+}
+</script>
+<div class="ui segment">
+	<h2 class="ui right floated header"><%= talkto %>'s conversation</h2>
+	<br>
+	<hr>
+	<div class="TEXTO">
+	<% message.forEach(function(element) { %>
+		<% var name = element["signin"] %>
+		<% var message = element["message"] %>
+		<% var date = element["sendDate"] %>
+		<% if (name == talkto) { %>
+			<div id="mesages">
+			<div class="ui comments" id="msgtpl" style="border: 14px solid grey;background: grey;border-radius: 10px;margin-bottom:3px">
+				<div class="comment">
+					<div class="content">
+						<a class="author"><%= talkto %></a>
+						<div class="metadata">
+							<div class="date"><%= date %></div>
+						</div>
+						<hr>
+						<div class="text">
+							<%= message %>
+						</div>
+					</div>
+				</div>
+				<br>
+			</div>
+			</div>
+		<% } else { %>
+			<div id="messages" >
+			<div class="ui comments" id="msgtpl" style="width:50%;border: 14px solid #2185d0;background:#2185d0;border-radius: 10px;margin-bottom:3px;">
+				<div class="comment">
+					<div class="content">
+						<a class="author"><%= me %></a>
+						<div class="metadata">
+							<div class="date"><%= date %></div>
+						</div>
+						<hr>
+						<div class="text">
+							<%= message %>
+						</div>
+					</div>
+				</div>
+				<br>
+			</div>
+			</div>
+		<% } %>
+	<% }) %>
+	</div>
+	<form action="" id="formsg" class="ui form">
+		<input type="text" class="message" id="message" maxlength="160" class="text"/>
+		<input type="hidden" id="recup" value="<%=talkto %>" class="text"/>
+		<input type="hidden" id="usr" value="<%=me %>" class="text"/>
+		<input type="submit" class="ui primary submit button send" value="Submit" class="submit"/>
+	</form>
+</div>
+
+<% include footer %>
+
+<script>
+
+	 $('#formsg').submit(function(event) {
+	 	event.preventDefault()
+		console.log('======================')
+		socket.emit('newmsg', {message: $('#message').val(), recup: $('#recup').val(), moi: $('#usr').val() })
+		$('#message').val('')
+		$('#message').focus()
+	 })
+
+	 socket.on('newmsgs', (function(message){
+	 		console.log($('#recup').val())
+			$('.TEXTO').append('<div id="messages"><div class="ui comments" id="msgtpl" style="width:50%;border: 14px solid #2185d0;background:#2185d0;border-radius: 10px;margin-bottom:3px;"><div class="comment"><div class="content"><a class="author">' + message.name + '</a><div class="metadata"><div class="date">'+ message.h + ' : ' + message.m + '</div></div><hr><div class="text">'+ message.message +'</div></div></div><br></div></div>');
+			$('.TEXTO').animate({scrollTop : $('#messages').prop('scrollHeight') }, 500);
+	 }))
+	 socket.on('hismsg', (function(message){
+	 		console.log($('#recup').val())
+			$('.TEXTO').append('<div id="messages"><div class="ui comments" id="msgtpl" style="width:50%;border: 14px solid #2185d0;background:#2185d0;border-radius: 10px;margin-bottom:3px;"><div class="comment"><div class="content"><a class="author">' + message.name + '</a><div class="metadata"><div class="date">'+ message.h + ' : ' + message.m + '</div></div><hr><div class="text">'+ message.message +'</div></div></div><br></div></div>');
+			$('.TEXTO').animate({scrollTop : $('#messages').prop('scrollHeight') }, 500);
+	 }))
+
+</script>

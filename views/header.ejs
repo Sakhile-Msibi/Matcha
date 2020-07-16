@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+		<title>MATCHA</title>
+		<!-- Semantic Core CSS -->
+		<link href="../semantic/semantic.css" rel="stylesheet">
+		<!-- Custom CSS -->
+		<link href="../stylesheets/simple-sidebar.css" rel="stylesheet">
+		<!-- mine -->
+		<link href="../stylesheets/style.css" rel="stylesheet">
+		<!-- TOASTR -->
+		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+		<!-- jQuery -->
+		<script src="../javascripts/jquery.js"></script>
+
+		<!-- semantic -->
+		<script src="../semantic/semantic.min.js"></script>
+		<script scr="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/components/accordion.js"></script>
+
+	</head>
+
+	<body>
+
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+		</script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js">
+		</script>
+
+		<nav class="navbar">
+			<a class="navbar-brand" href="#">
+			</a>
+		</nav>
+		<div class="ui grid">
+			<div class="computer tablet only row">
+				<div class="ui inverted fixed menu navbar page grid">
+					<% if (locals.ok) { %>
+						<a href="/home" class="brand item">
+							<img src="/images/matcha1.jpg" alt="">
+						</a>
+					<% } else { %>
+						<a href="#" class="brand item">
+							<img src="/images/matcha1.jpg" alt="">
+						</a>
+					<% } %>
+					<% if (locals && locals.signin) { %>
+					<div class="right menu">
+						<% if (locals.ok) { %>
+							<a href="/message" class="item">
+								<i class="talk icon"></i>
+							</a>
+							<a href="/notice" class="item">
+								<i class="world icon" id='testt'></i>
+								<% if (locals && locals.cheecked) { %>
+									<div class="floating ui red label" style="top:10px;">!</div>
+								<% } %>
+							</a>
+							<a href="/search_user" class="item">
+								<i class="search icon"></i>
+							</a>
+						<% } %>
+						<% if (locals.profilePic) { %>
+						<a href='/profile' class="item"><img class="ui right spaced avatar image" src="/images/upload_images/<%=locals.profilePic%>"> <%= locals.signin %> </a>
+						<% } else { %>
+						<a href='/profile' class="item"><img class="ui right spaced avatar image" src="/images/profile/Thabo.jpg"> <%= locals.signin %> </a>
+						<% } %>
+						<a href="/signout" onclick="io.disconnect()" class="item">signout</a>
+					</div>
+					<% } else { %>
+					<div class="right menu">
+						<a href="/forgot_password" class="item">
+							Forgot password?
+						</a>
+					</div>
+					<% } %>
+				</div>
+			</div>
+			<div class="mobile only row">
+				<div class="ui fixed inverted navbar menu">
+					<a href="#" class="brand item">
+						<img src="/images/matcha1.jpg" class="">
+					</a>
+					<div class="right menu open">
+						<a href="#" class="menu item">
+							<i class="content icon"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="ui main container">
+			<% if (locals && locals.error) { %>
+				<script>
+					toastr.error('<%= locals.error %>')
+				</script>
+			<% } %>
+			<% if (locals && locals.success) { %>
+				<script>
+					toastr.success('<%= locals.success %>')
+				</script>
+			<% } %>
+			<% if (locals && locals.warning) { %>
+				<script>
+					toastr.warning('<%= locals.warning %>')
+				</script>
+			<% } %>
+			<% if (locals && locals.info) { %>
+				<script>
+					toastr.info('<%= locals.info %>')
+				</script>
+			<% } %>
+		</div>	

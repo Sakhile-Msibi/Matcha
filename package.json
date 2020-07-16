@@ -1,0 +1,45 @@
+{
+  "name": "matcha",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon ./bin/www",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "smsibi",
+    "email": "thembinkosimsibi198@gmail.com",
+    "url": "https://github.com/Sakhile-Msibi/Matcha"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "age-calculator": "^1.0.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "connect-redis": "^4.0.4",
+    "cookie-parser": "^1.4.5",
+    "debug": "^4.1.1",
+    "ejs": "~2.5.7",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.7-alpha.3",
+    "express-session": "^1.17.1",
+    "http": "0.0.1-security",
+    "iplocation": "^7.2.0",
+    "moment": "^2.27.0",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
+    "node-mailer": "^0.1.1",
+    "nodemailer": "^6.4.10",
+    "nodemon": "^2.0.4",
+    "parse": "^2.14.0",
+    "redis": "^3.0.2",
+    "regex-email": "^1.0.2",
+    "req-flash": "0.0.3",
+    "serve-favicon": "^2.5.0",
+    "socket.io": "^2.3.0",
+    "socket.io.session": "^1.0.13",
+    "update": "^0.7.4",
+    "uuid": "^8.2.0"
+  }
+}

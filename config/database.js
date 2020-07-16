@@ -148,79 +148,20 @@ connection.query('CREATE TABLE IF NOT EXISTS blocked ('
 })
 
 //FILL TABLE USER :
-//
-// wickedpool
-//
-connection.query('INSERT INTO user SET signin = "wickedpool", name = "Thomas", surname = "Giraud", email = "thomasgirauddu73@gmail.com", passwd = "$2a$10$7ZelqP8zbBqsX91wyJ2NuOoDedtiwN5n9I4O6rCdc4gdyZw7oYMli", register = "2017-09-23 20:37:10", age = "19", gender = "male", city = "Paris", description = "Oklm thomas du 73 rpz", interest = "female", profilePic = "medium_thgiraud.jpg", latitude = "48.8965", longitude = "2.3182", hash = "$2a$10$vtRrqaG87MzU8E3KVe9Zyusj9rnttR2DsRAeUlyibncE6aE75BIui", connect = "2017-09-23 20:37:10"');
-connection.query('INSERT INTO tag SET signin = "wickedpool", tag = "oklm"');
-connection.query('INSERT INTO tag SET signin = "wickedpool", tag = "easy"');
-connection.query('INSERT INTO tag SET signin = "wickedpool", tag = "alcool"');
-connection.query('INSERT INTO tag SET signin = "wickedpool", tag = "bedo"');
-console.log('User wickedpool created !');
-//
-// glouyot
-//
-connection.query('INSERT INTO user SET signin = "glouyot", name = "Guillaume", surname = "Louyot", email = "glouyot@gmail.com", passwd = "$2a$10$7ZelqP8zbBqsX91wyJ2NuOoDedtiwN5n9I4O6rCdc4gdyZw7oYMli", register = "2017-09-23 20:37:10", age = "25", gender = "male", city = "Paris", description = "Glouyot 42 rpz la mif", interest = "female", profilePic = "glouyot.jpg", latitude = "48.8965", longitude = "2.3182", hash = "$2a$10$ur8En9Y6Xn2YRpVL/UOy0.8YJqGI6X.m344JvaVInCdPYSOsdWrF.", connect = "2017-09-23 20:37:10"');
-connection.query('INSERT INTO tag SET signin = "glouyot", tag = "hey"');
-connection.query('INSERT INTO tag SET signin = "glouyot", tag = "lutins"');
-connection.query('INSERT INTO tag SET signin = "glouyot", tag = "alcool"');
-connection.query('INSERT INTO tag SET signin = "glouyot", tag = "drug"');
-console.log('User glouyot created !');
-//
-// jorobin
-//
-connection.query('INSERT INTO user SET signin = "jorobin", name = "Josephine", surname = "Robin", email = "jorobin@gmail.com", passwd = "$2a$10$7ZelqP8zbBqsX91wyJ2NuOoDedtiwN5n9I4O6rCdc4gdyZw7oYMli", register = "2017-09-23 20:37:10", age = "21", gender = "female", city = "Paris", description = "Salut moi jsuis oklm", interest = "male", profilePic = "jorobin.jpg", latitude = "48.8965", longitude = "2.3182", hash = "$2a$10$xpT3mtk//0W2cDKC7xUPkuMpg3Gw6c/cwGNP6HGR4hbaNfXJSuZAm", connect = "2017-09-23 20:37:10"');
-connection.query('INSERT INTO tag SET signin = "jorobin", tag = "hey"');
-connection.query('INSERT INTO tag SET signin = "jorobin", tag = "heyo"');
-connection.query('INSERT INTO tag SET signin = "jorobin", tag = "heyi"');
-connection.query('INSERT INTO tag SET signin = "jorobin", tag = "heyueu"');
-console.log('User jorobin created !');
-//
-// cuzureau
-//
-connection.query('INSERT INTO user SET signin = "cuzureau", name = "Christophe", surname = "Uzureau", email = "cuzureau@gmail.com", passwd = "$2a$10$7ZelqP8zbBqsX91wyJ2NuOoDedtiwN5n9I4O6rCdc4gdyZw7oYMli", register = "2017-09-23 20:37:10", age = "27", gender = "male", city = "Paris", description = "Coucoucou moi c cuzureau", interest = "female", profilePic = "cuzureau.jpg", latitude = "48.8965", longitude = "2.3182", hash = "$2a$10$l4AXqA94X/tl2McbMLtp6uRGOAnXag.Ckb6qYYNsNO0hgln6mvMNK", connect = "2017-09-23 20:37:10"');
-connection.query('INSERT INTO tag SET signin = "cuzureau", tag = "alcool"');
-connection.query('INSERT INTO tag SET signin = "cuzureau", tag = "heyoo"');
-connection.query('INSERT INTO tag SET signin = "cuzureau", tag = "cc"');
-connection.query('INSERT INTO tag SET signin = "cuzureau", tag = "hey"');
-console.log('User cuzureau created !');
-//
-// mkantzer
-//
-connection.query('INSERT INTO user SET signin = "mkantzer", name = "Manon", surname = "Kantzer", email = "mkantzer@gmail.com", passwd = "$2a$10$7ZelqP8zbBqsX91wyJ2NuOoDedtiwN5n9I4O6rCdc4gdyZw7oYMli", register = "2017-09-23 20:37:10", age = "21", gender = "female", city = "Paris", description = "Salut moi jsuis oklm", interest = "male", profilePic = "mkantzer.jpg", latitude = "48.8965", longitude = "2.3182", hash = "$2a$10$of7Y6mXCaN7qGmEEaZY/buP3CA9N0FkLBT7PkPn0XoaHRfLBGCpsG", connect = "2017-09-23 20:37:10"');
-connection.query('INSERT INTO tag SET signin = "jorobin", tag = "hey"');
-connection.query('INSERT INTO tag SET signin = "jorobin", tag = "heyo"');
-connection.query('INSERT INTO tag SET signin = "jorobin", tag = "heyi"');
-connection.query('INSERT INTO tag SET signin = "jorobin", tag = "heyueu"');
-console.log('User mkantzer created !');
-//
-// arive-de
-//
-connection.query('INSERT INTO user SET signin = "arive-de", name = "Alix", surname = "Rive-De", email = "arive-de@gmail.com", passwd = "$2a$10$7ZelqP8zbBqsX91wyJ2NuOoDedtiwN5n9I4O6rCdc4gdyZw7oYMli", register = "2017-09-23 20:37:10", age = "24", gender = "female", city = "Paris", description = "Salut moi jsuis alix oklm", interest = "male", profilePic = "medium_arive-de.jpg", latitude = "48.8965", longitude = "2.3182", hash = "$2a$10$AfXF2JY1FpwAzljjZI8j/emvQc4eBrqwhfJb79bmavVrdi5sFAdiG", connect = "2017-09-23 20:37:10"');
-connection.query('INSERT INTO tag SET signin = "arive-de", tag = "biit"');
-connection.query('INSERT INTO tag SET signin = "arive-de", tag = "oklm"');
-connection.query('INSERT INTO tag SET signin = "arive-de", tag = "joy"');
-connection.query('INSERT INTO tag SET signin = "arive-de", tag = "happy"');
-console.log('User arive-de created !');
-//
-// cfatrane
-//
-connection.query('INSERT INTO user SET signin = "cfatrane", name = "Charles Edouard", surname = "Fatrane", email = "cfatrane@gmail.com", passwd = "$2a$10$7ZelqP8zbBqsX91wyJ2NuOoDedtiwN5n9I4O6rCdc4gdyZw7oYMli", register = "2017-09-23 20:37:10", age = "21", gender = "male", city = "Paris", description = "Coucoucou moi c cfatraner en Y", interest = "female", profilePic = "cfatrane.jpg", latitude = "48.8965", longitude = "2.3182", hash = "$2a$10$LKerxHiJg0tDOxZ39RXH3eaUJARYRGu6jHpYPWKSxMkUzk6dlbvI.", connect = "2017-09-23 20:37:10"');
-connection.query('INSERT INTO tag SET signin = "cfatrane", tag = "oklm"');
-connection.query('INSERT INTO tag SET signin = "cfatrane", tag = "briquets"');
-connection.query('INSERT INTO tag SET signin = "cfatrane", tag = "easy"');
-connection.query('INSERT INTO tag SET signin = "cfatrane", tag = "bites"');
-console.log('User cfatrane created !');
-//
-// POPULARITY
-//
-connection.query('INSERT INTO popularity SET signin = "wickedpool", popular = 120')
-connection.query('INSERT INTO popularity SET signin = "glouyot", popular = 60')
-connection.query('INSERT INTO popularity SET signin = "jorobin", popular = 220')
-connection.query('INSERT INTO popularity SET signin = "cuzureau", popular = 90')
-connection.query('INSERT INTO popularity SET signin = "mkantzer", popular = 420')
-connection.query('INSERT INTO popularity SET signin = "arive-de", popular = 160')
-connection.query('INSERT INTO popularity SET signin = "cfatrane", popular = 110')
+/*
+* Sakhile
+*/
+connection.query('INSERT INTO user SET signin = "Sakhile", name = "Sakhile", surname = "Msibi", email = "thembinkosimsibi198@gmail.com", passwd = "$2a$10$.QQ1jYykOeWog.kHXL83N.Bxeg70a8jbOzo4E02EYGBy1JmwgHYF6", register = "2020-07-16 10:29:49", age = "30", gender = "male", city = "Johannesburg", description = "Man is not hot", interest = "female", profilePic = "simba.jpg", latitude = "26.2041", longitude = "28.0473", hash = "t0.9740370072815676", connect = "2020-07-16 11:20:31", verified = "1"');
+connection.query('INSERT INTO tag SET signin = "Sakhile", tag = "chess"');
+connection.query('INSERT INTO tag SET signin = "Sakhile", tag = "soccer"');
+connection.query('INSERT INTO tag SET signin = "Sakhile", tag = "coding"');
+connection.query('INSERT INTO tag SET signin = "Sakhile", tag = "reading"');
+console.log('User Sakhile created !');
+
+/*
+* POPULARITY
+*/
+connection.query('INSERT INTO popularity SET signin = "Sakhile", popular = 120')
 console.log("table popularity filled")
 
 //End of connection

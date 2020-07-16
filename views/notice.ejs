@@ -1,0 +1,164 @@
+<% include header %>
+
+<div class="ui segment">
+	<h2 class="ui right floated header">Notifications</h2>
+	<br>
+	<hr>
+	<div class="ui feed">
+		<% if (notice) { %>
+			<% notice.forEach(function(element) { %>
+				<% var signin = element["signin"] %>
+				<% var date = element["sendDate"] %>
+				<% var type = element["type"] %>
+				<% var message = element["msg"] %>
+				<% var readed = element["readed"] %>
+				<% var id = element["id"] %>
+				<% if (type == "message") { %>
+					<% if (readed == 0) { %>
+						<a href="/notice/<%= id %>">
+							<div class="event" style="background:grey">
+								<div class="label">
+									<i class="comment icon"></i>
+								</div>
+								<div class="content">
+									<div class="summary">
+										<%= message %>
+										<div class="date"><%= date %></div>
+									</div>
+								</div>
+							</div>
+						</a>
+					<% } else { %>
+						<div class="event">
+							<div class="label">
+								<i class="comment icon"></i>
+							</div>
+							<div class="content">
+								<div class="summary">
+									<%= message %>
+									<div class="date"><%= date %></div>
+								</div>
+							</div>
+						</div>
+					<% } %>
+				<% } else if (type == "like") { %>
+					<% if (readed == 0) { %>
+						<a href="/notice/<%= id %>">
+							<div class="event" style="background:grey">
+								<div class="label">
+									<i class="thumbs up icon"></i>
+								</div>
+								<div class="content">
+									<div class="summary">
+										<%= message %>
+										<div class="date"><%= date %></div>
+									</div>
+								</div>
+							</div>
+						</a>
+					<% } else { %>
+						<div class="event">
+							<div class="label">
+								<i class="thumbs up icon"></i>
+							</div>
+							<div class="content">
+								<div class="summary">
+									<%= message %>
+									<div class="date"><%= date %></div>
+								</div>
+							</div>
+						</div>
+					<% } %>
+				<% } else if (type == "match") { %>
+					<% if (readed == 0) { %>
+						<a href="/notice/<%= id %>">
+							<div class="event" style="background:grey">
+								<div class="label">
+									<i class="heart icon"></i>
+								</div>
+								<div class="content">
+									<div class="summary">
+										<%= message %>
+										<div class="date"><%= date %></div>
+									</div>
+								</div>
+							</div>
+						</a>
+					<% } else { %>
+						<div class="event">
+							<div class="label">
+								<i class="heart icon"></i>
+							</div>
+							<div class="content">
+								<div class="summary">
+									<%= message %>
+									<div class="date"><%= date %></div>
+								</div>
+							</div>
+						</div>
+					<% } %>
+				<% } else if (type == "views") { %>
+					<% if (readed == 0) { %>
+						<a href="/notice/<%= id %>">
+							<div class="event" style="background:grey">
+								<div class="label">
+									<i class="newspaper icon"></i>
+								</div>
+								<div class="content">
+									<div class="summary">
+										<%= message %>
+										<div class="date"><%= date %></div>
+									</div>
+								</div>
+							</div>
+						</a>
+					<% } else { %>
+						<div class="event">
+							<div class="label">
+								<i class="newspaper icon"></i>
+							</div>
+							<div class="content">
+								<div class="summary">
+									<%= message %>
+									<div class="date"><%= date %></div>
+								</div>
+							</div>
+						</div>
+					<% } %>
+				<% } else { %>
+					<% if (readed == 0) { %>
+						<a href="/notice/<%= id %>">
+							<div class="event" style="background:grey">
+								<div class="label">
+									<i class="thumbs down icon"></i>
+								</div>
+								<div class="content">
+									<div class="summary">
+										<%= message %>
+										<div class="date"><%= date %></div>
+									</div>
+								</div>
+							</div>
+						</a>
+					<% } else { %>
+						<div class="event">
+							<div class="label">
+								<i class="thumbs down icon"></i>
+							</div>
+							<div class="content">
+								<div class="summary">
+									<%= message %>
+									<div class="date"><%= date %></div>
+								</div>
+							</div>
+						</div>
+					<% } %>
+				<% } %>
+			<% }) %>
+		<% } %>
+	</div>
+</div>
+		
+</div>
+
+<% include footer %>
