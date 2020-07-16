@@ -47,6 +47,9 @@ var 	index = require('./routes/index'),
 		notice = require('./routes/notice'),
 		confirmation = require('./routes/confirmation');
 
+const loginchecker = require('./routes/loginchecker.js');
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
@@ -124,7 +127,8 @@ app.use('/block_user', block_user)
 app.use('/search_user', search_user)
 app.use('/password_reset', password_reset)
 app.use('/unblock_user', unblock_user)
-app.use('/confirmation/:id', confirmation);
+app.use('/confirmation/', confirmation);
+
 
 var people = {}
 app.io.on('connection', function(socket){

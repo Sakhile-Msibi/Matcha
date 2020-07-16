@@ -5,16 +5,17 @@ var bcryptjs = require('bcryptjs');
 var parse = require('parse').parse;
 var iplocation = require('iplocation');
 var ageCalc = require('age-calculator');
-var regexMail = require('regex-email');
+// var regexMail = require('regex-email');
 var router = express.Router();
 const nodemailer = require('nodemailer');
 const { v1: uuidv1 } = require('uuid');
 const emailToken = uuidv1();
 
 var {AgeFromDateString, AgeFromDate} = require('age-calculator');
+const loginchecker = require('./loginchecker.js');
 const code = 10;
 
-router.post('/', function(req, res) {
+router.post('/', loginchecker.redirectDashboard, function(req, res) {
 	var signin = req.body.signin;
 	var name = req.body.name;
 	var surname = req.body.surname;
@@ -31,6 +32,7 @@ router.post('/', function(req, res) {
 	var	regexAlphanumeric = /[a-zA-Z0-9]/;
 	var	regexchar = /[a-zA-Z-0-9\#\$\%\^\&\*\,\.]/;
 	var	regexDate = /^\d\d\d\d-(0[1-9]|1[0-2])-(0[1-9]|[1-2]\d|3[0-1])$/;
+	var emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\")){3,40}@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,6})$/i;
 	var	hash = bcryptjs.hashSync(pswd, code);
 	if (signin && name && surname && email && age && gender && city && pswd && repswd) {
 		conn.query("SELECT * FROM user WHERE signin = ? OR email = ?", [signin, email], (err, rows, result) => {
@@ -41,7 +43,7 @@ router.post('/', function(req, res) {
     		if (signin.length > 60 || email.length > 150 || surname.length > 60 || name.length > 60) {
 	    		req.session.error = 'Field is too long';
 		    	res.redirect('/');
-    		} else if (!regexMail.test(email)) {
+    		} else if (!emailPattern.test(email)) {
 	    		req.session.error = 'Invalid email!';
 		    	res.redirect('/');
     		} else if (signin.search(regexAlphanumeric)) {

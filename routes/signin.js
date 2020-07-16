@@ -1,14 +1,18 @@
+const loginreader = require('./loginchecker.js');
+
 var express = require('express'),
 	conn = require('../config/conn.js'),
 	session = require('express-session'),
 	bcryptjs = require('bcryptjs'),
 	router = express.Router()
 
-router.get('/', function(req, res, next) {
+router.get('/',loginreader.redirectDashboard, function(req, res, next) {
 	res.render('signin', { title: 'Express' })
 })
 
 router.post('/', function(req, res) {
+
+	console.log(req.body.pswd);
 	if (req.session && req.session.signin) {
 		req.session.error = 'Access denied';
 		res.redirect('/home')
@@ -19,7 +23,8 @@ router.post('/', function(req, res) {
 		regexCapital = /[A-Z]/,
 		regexCharacters = /[a-zA-Z-0-9\#\$\%\^\&\*\,\.]/
 	if (signin && pswd) {
-		conn.query("SELECT * FROM user WHERE signin = ? LIMIT 1", [signin], (err, rows, result) => {
+		conn.query("SELECT * FROM user WHERE signin = ? AND verified = 1 LIMIT 1", [signin], (err, rows, result) => {
+			console.log(result.length);
 			if (err) {
 				req.session.error = 'The username or password is incorrect';
 				res.redirect('/signin');
@@ -45,7 +50,8 @@ router.post('/', function(req, res) {
 				conn.query("UPDATE user SET online = 1 WHERE signin = ?", [signin], (err) => {
 					if (err) console.log(err)
 				})
-                if (bcryptjs.compareSync(pswd, rows[0].passwd)) { 
+                if (bcryptjs.compareSync(pswd, rows[0].passwd)) {
+					// console.log(`This is  bcrypt ${bcryptjs.compareSync(pswd, rows[0].passwd)}`);
 					req.session.signin = signin.toLowerCase()
 					if (rows[0].profilePic) {
 						req.session.ok = true
@@ -84,11 +90,11 @@ router.post('/', function(req, res) {
 						res.redirect('/profile')
 					}
 				} else {
-					req.session.error = 'The username or password is incorrect';
+					req.session.error = 'The username or password is incorrect ';
 					res.redirect('/signin');
 				}
 			} else {
-				req.session.error = 'The username or password is incorrect';
+				req.session.error = 'Please make sure that you are a verified user and that username or password is correct';
 				res.redirect('/signin');
 			}
 		});

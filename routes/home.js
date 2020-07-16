@@ -1,9 +1,10 @@
 var conn = require('../config/conn.js');
 var express = require('express');
 var session = require('express-session');
+const loginchecker = require('./loginchecker.js');
 var router = express.Router();
 
-router.get('/', function(req, res, next) {
+router.get('/', loginchecker.redirectLogin, function(req, res, next) {
 	if (req.session && req.session.signin) {
 		if (req.session.ok) {
 			conn.query("SELECT signin FROM blocked WHERE user = ?", [req.session.signin], (err, rows0, result) => {
