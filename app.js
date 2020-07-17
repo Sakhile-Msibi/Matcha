@@ -127,7 +127,7 @@ app.use('/block_user', require('./routes/block_user'))
 app.use('/search_user', require('./routes/search_user'))
 app.use('/password_reset', require('./routes/password_reset'))
 app.use('/unblock_user', require('./routes/unblock_user'))
-app.use('/confirmation/:id', require('./routes/confirmation'));
+app.use('/confirmation', require('./routes/confirmation'));
 
 
 var people = {}

@@ -5,7 +5,6 @@ var bcryptjs = require('bcryptjs');
 var parse = require('parse').parse;
 var iplocation = require('iplocation');
 var ageCalc = require('age-calculator');
-// var regexMail = require('regex-email');
 var router = express.Router();
 const nodemailer = require('nodemailer');
 const { v1: uuidv1 } = require('uuid');

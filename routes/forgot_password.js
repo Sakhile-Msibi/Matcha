@@ -2,7 +2,7 @@ var conn = require('../config/conn.js');
 var express = require('express');
 var session = require('express-session');
 var nodeMail = require('node-mailer');
-var regexMail = require('regex-email');
+var regexMail = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\")){3,40}@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,6})$/i;
 var router = express.Router();
 
 
