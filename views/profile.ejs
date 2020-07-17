@@ -38,15 +38,15 @@
 					Women, <%= locals.age %> years old
 				</p>
 			<% } %>
-			<% if (locals.interest == "male") { %>
+			<% if (locals.sexual_preference == "male") { %>
 				<p> Interested in: &nbsp; Men <p>
-			<% } else if (locals.interest == "female") { %>
+			<% } else if (locals.sexual_preference == "female") { %>
 				<p> Interested in: &nbsp; Women <p>
-			<% } else if (locals.interest == "both") { %>
+			<% } else if (locals.sexual_preference == "both") { %>
 				<p> Interested in: &nbsp; Both <p>
 			<% } %>
 			<hr class="ui">
-				<div class="two fields">
+				<div class="four fields">
 					<div class="field">
 						<label>Edit Name</label>
 						<input placeholder="First Name" name="name" type="text">
@@ -63,6 +63,63 @@
 							<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Submit ">
 						</div>
 					</div>
+					<div class="field">
+						<label>Edit email</label>
+						<input placeholder="email" name="email" type="text">
+					<hr class="ui">
+						<div class="ui center">
+							<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Submit ">
+						</div>
+					</div>
+					<div class="field">
+						<label>Edit city</label>
+						<input placeholder="city" name="city" type="text">
+					<hr class="ui">
+						<div class="ui center">
+							<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Submit ">
+						</div>
+						<!-- <div class="field"> -->
+
+							<div class="field">
+								<label>sexual_preference</label>
+								<div class="ui dropdown selection" tabindex="0">
+									<select name="sexual_preference" id="sexual_preference">
+										<option value="">sexual_preference</option>
+										<option value="male">Male</option>
+										<option value="female">Female</option>
+										<option value="both">Both</option>
+									</select>
+									<i class="dropdown icon"></i>
+									<div class="default text">sexual_preference</div>
+									<div class="menu" tabindex="-1">
+										<div class="item" data-value="male">Male</div>
+										<div class="item" data-value="female">Female</div>
+										<div class="item" data-value="both">Both</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- <label>Edit sexual_preference</label>
+					<div class="ui dropdown selection" tabindex="0">
+						<select name="gender" id="gender">
+							<option value="">Gender</option>
+							<option value="male">Male</option>
+							<option value="female">Female</option>
+							<option value="other">Other</option>
+						</select>
+							<i class="dropdown icon"></i>
+							<div class="default text">Gender</div>
+							<div class="menu" tabindex="-1">
+								<div class="item" data-value="male">Male</div>
+								<div class="item" data-value="female">Female</div>
+								<div class="item" data-value="other">Other</div>
+							</div>
+					</div> -->
+							<!-- <input placeholder="sexual_preference" name="sexual_preference" type="text"> -->
+						<hr class="ui">
+							<div class="ui center">
+								<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Submit ">
+							</div>
 				</div>
 			</form>
 		</div>

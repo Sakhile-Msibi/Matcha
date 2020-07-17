@@ -94,7 +94,7 @@ app.use(function(req, res, next) {
 	res.locals.name = req.session.name
 	res.locals.age = req.session.age
 	res.locals.ok = req.session.ok
-	res.locals.interest = req.session.interest
+	res.locals.sexual_preference = req.session.sexual_preference
 	res.locals.descri = req.session.descri
 	res.locals.profilePic = req.session.profilePic
 	res.locals.log = req.session.log

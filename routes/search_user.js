@@ -44,7 +44,7 @@ router.get('/tag', function(req, res, next) {
 					req.session.error = 'A tag must contain at least 3 characters';
 					res.redirect('/search_user');
 				} else {
-					conn.query("SELECT u.signin, u.name, u.surname, u.gender, u.age, u.interest, u.description, u.profilePic FROM user u INNER JOIN tag t ON t.signin = u.signin WHERE t.tag = ? AND u.signin != ? AND u.profilePic IS NOT NULL AND u.gender = ? AND (INTEREST = ? OR INTEREST = ?)", [tag, req.session.signin, req.session.interest, req.session.gender, "both"], (err, rows, result) => {
+					conn.query("SELECT u.signin, u.name, u.surname, u.gender, u.age, u.sexual_preference, u.description, u.profilePic FROM user u INNER JOIN tag t ON t.signin = u.signin WHERE t.tag = ? AND u.signin != ? AND u.profilePic IS NOT NULL AND u.gender = ? AND (sexual_preference = ? OR sexual_preference = ?)", [tag, req.session.signin, req.session.sexual_preference, req.session.gender, "both"], (err, rows, result) => {
 						if (err) console.log(err)
 						if (rows != undefined) {
 							var profile = rows
@@ -94,7 +94,7 @@ router.get('/city', function(req, res, next) {
 					req.session.error = 'A name of a city must contain at least 3 characters';
 					res.redirect('/search_user');
 				} else {
-					conn.query("SELECT signin, name, surname, gender, age, interest, description, profilePic FROM user WHERE city = ? AND signin != ? AND profilePic IS NOT NULL AND gender = ? AND (INTEREST = ? OR INTEREST = ?)", [city, req.session.signin, req.session.interest, req.session.gender, "both"], (err, rows, result) => {
+					conn.query("SELECT signin, name, surname, gender, age, sexual_preference, description, profilePic FROM user WHERE city = ? AND signin != ? AND profilePic IS NOT NULL AND gender = ? AND (sexual_preference = ? OR sexual_preference = ?)", [city, req.session.signin, req.session.sexual_preference, req.session.gender, "both"], (err, rows, result) => {
 						if (err) console.log(err)
 						if (rows != undefined) {
 							var profile = rows
@@ -149,7 +149,7 @@ router.get('/age', function(req, res, next) {
 					req.session.error = "Minimum age is higher than the maximum age";
 					res.redirect('/search');
 				} else {
-					conn.query("SELECT signin, name, surname, gender, age, interest, description, profilePic FROM user WHERE city = ? AND signin != ? AND profilePic IS NOT NULL AND gender = ? AND (INTEREST = ? OR INTEREST = ?) AND age BETWEEN ? AND ?", [req.session.city, req.session.signin, req.session.interest, req.session.gender, "both", min, max], (err, rows, result) => {
+					conn.query("SELECT signin, name, surname, gender, age, sexual_preference, description, profilePic FROM user WHERE city = ? AND signin != ? AND profilePic IS NOT NULL AND gender = ? AND (sexual_preference = ? OR sexual_preference = ?) AND age BETWEEN ? AND ?", [req.session.city, req.session.signin, req.session.sexual_preference, req.session.gender, "both", min, max], (err, rows, result) => {
 						if (err) console.log(err)
 						if (rows != undefined) {
 							var profile = rows
@@ -203,7 +203,7 @@ router.get('/popular', function(req, res, next) {
 					req.session.error = "Minimum popularity is larger than maximum popularity";
 					res.redirect('/search_user');
 				} else {
-			conn.query("SELECT u.signin, u.name, u.surname, u.gender, u.age, u.interest, u.description, u.profilePic FROM user u INNER JOIN popularity p ON u.signin = p.signin WHERE u.city = ? AND u.signin != ? AND u.profilePic IS NOT NULL AND gender = ? AND (INTEREST = ? OR INTEREST = ?) AND p.popular BETWEEN ? AND ?", [req.session.city, req.session.signin, req.session.interest, req.session.gender, "both", min, max], (err, rows, result) => {
+			conn.query("SELECT u.signin, u.name, u.surname, u.gender, u.age, u.sexual_preference, u.description, u.profilePic FROM user u INNER JOIN popularity p ON u.signin = p.signin WHERE u.city = ? AND u.signin != ? AND u.profilePic IS NOT NULL AND gender = ? AND (sexual_preference = ? OR sexual_preference = ?) AND p.popular BETWEEN ? AND ?", [req.session.city, req.session.signin, req.session.sexual_preference, req.session.gender, "both", min, max], (err, rows, result) => {
 						if (err) console.log(err)
 						if (rows != undefined) {
 							var profile = rows

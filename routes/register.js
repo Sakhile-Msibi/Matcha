@@ -24,7 +24,7 @@ router.post('/', loginchecker.redirectDashboard, function(req, res) {
 	var age = new AgeFromDateString(req.body.age).age;
 	var	pswd = req.body.pswd;
 	var	repswd = req.body.repswd;
-	var	interest = req.body.interest;
+	var	sexual_preference = req.body.sexual_preference;
 	var regexSmall = /[a-z]/;
 	var	regexCapital = /[A-Z]/;
 	var	regexSC = /[a-zA-Z]/;
@@ -94,7 +94,7 @@ router.post('/', loginchecker.redirectDashboard, function(req, res) {
 			var datarand = "t" + Math.random(555, 9560)
 			conn.query('INSERT INTO popularity SET signin = ?, popular = 5', [signin], (err, rows, result) => {
 				if (err) console.log(err)
-				conn.query('INSERT INTO user SET signin = ?, name = ?, surname = ?, email = ?, passwd = ?, register = ?, age = ?, gender = ?, city = ?, interest = ?, hash = ?, token = ?, verified = ?', [signin, name, surname, email, hash, new Date(), age, gender, city, interest, datarand, emailToken, 0], (err, rows, result) => {
+				conn.query('INSERT INTO user SET signin = ?, name = ?, surname = ?, email = ?, passwd = ?, register = ?, age = ?, gender = ?, city = ?, sexual_preference = ?, hash = ?, token = ?, verified = ?', [signin, name, surname, email, hash, new Date(), age, gender, city, sexual_preference, datarand, emailToken, 0], (err, rows, result) => {
 					if (err) {
 						console.log(err)
 						req.session.error = 'An error has occurred';

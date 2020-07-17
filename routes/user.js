@@ -21,7 +21,7 @@ router.get('/:id', function(req, res, next) {
 							var name = rows[0].name,
 								surname = rows[0].surname,
 								gender = rows[0].gender,
-								interest = rows[0].interest,
+								sexual_preference = rows[0].sexual_preference,
 								age = rows[0].age,
 								mainpic1 = rows[0].profilePic,
 								online = rows[0].online,
@@ -61,7 +61,7 @@ router.get('/:id', function(req, res, next) {
 											views = signin;
 										})
 									}
-									res.render('user', { title: 'Express', online: online, UserTag: UserTag, age: age, login2: signin, name: name, surname: surname, gender: gender, interest: interest, mainpic1: mainpic1, descri: descri, mine: req.session.signin, photo1: rows3[0].photo1, photo2: rows3[0].photo2, photo3: rows3[0].photo3, photo4: rows3[0].photo4, blocked: blocked, popular: popular, connected: connected })
+									res.render('user', { title: 'Express', online: online, UserTag: UserTag, age: age, login2: signin, name: name, surname: surname, gender: gender, sexual_preference: sexual_preference, mainpic1: mainpic1, descri: descri, mine: req.session.signin, photo1: rows3[0].photo1, photo2: rows3[0].photo2, photo3: rows3[0].photo3, photo4: rows3[0].photo4, blocked: blocked, popular: popular, connected: connected })
 								});
 								});
 							});

@@ -61,7 +61,7 @@ router.post('/', function(req, res) {
 						req.session.gender = rows[0].gender
 						req.session.profilePic = rows[0].profilePic
 						req.session.age = rows[0].age
-						req.session.interest = rows[0].interest
+						req.session.sexual_preference = rows[0].sexual_preference
 						req.session.city = rows[0].city
 						req.session.log = true
 						conn.query("UPDATE popularity SET popular = popular + 5 WHERE signin = ?", [signin], (err) => {
@@ -77,7 +77,7 @@ router.post('/', function(req, res) {
 						req.session.gender = rows[0].gender
 						req.session.surname = rows[0].surname
 						req.session.name = rows[0].name
-						req.session.interest = rows[0].interest
+						req.session.sexual_preference = rows[0].sexual_preference
 						req.session.city = rows[0].city
 						req.session.age = rows[0].age
 						req.session.info = 'Please fill in your presonal information';

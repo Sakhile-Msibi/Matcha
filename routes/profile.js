@@ -3,6 +3,7 @@ var express = require('express');
 var session = require('express-session');
 var fileUpload = require('express-fileupload');
 var router = express.Router();
+const regexMail = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\")){3,40}@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,6})$/i;
 
 router.use(fileUpload())
 
@@ -171,9 +172,17 @@ router.post('/upload/:id', function(req, res, next) {
 
 router.post('/base', function(req, res, next) {
 	if (req.session && req.session.signin) {
-		var name = req.body.name,
-			surname = req.body.surname,
-			RegexBoth = /[a-zA-Z]/
+		var name = req.body.name;
+		var	surname = req.body.surname;
+		var email = req.body.email;
+		var city = req.body.city;
+		var sexual_preference = req.body.sexual_preference;
+		var	RegexBoth = /[a-zA-Z]/;
+		var regexSmall = /[a-z]/;
+		var	regexCapital = /[A-Z]/;
+		var	regexSC = /[a-zA-Z]/;
+		var	regexAlphanumeric = /[a-zA-Z0-9]/;
+		var	regexchar = /[a-zA-Z-0-9\#\$\%\^\&\*\,\.]/;
 		if (name) {
 			if (name.search(RegexBoth)) {
 				req.session.error = 'The name must only contain alphabets';
@@ -194,7 +203,7 @@ router.post('/base', function(req, res, next) {
 			if (surname.search(RegexBoth)) {
 				req.session.error = 'The surname must only contain alphabets';
 				res.redirect('/profile');
-			} else if (name.length > 18) {
+			} else if (surname.length > 18) {
 				req.session.error = 'The surname must be less than 18 characters';
 				res.redirect('/profile');
 			} else {
@@ -205,6 +214,51 @@ router.post('/base', function(req, res, next) {
 					res.redirect('/profile');
 				})
 			}
+		}
+		if (email) {
+			 if (!regexMail.test(email)) {
+	    		req.session.error = 'Invalid email!';
+		    	res.redirect('/profile');
+			} else {
+				conn.query('UPDATE user SET email = ? where signin = ?', [email, req.session.signin], (err) => {
+					if (err) console.log(err)
+					req.session.email = email
+					req.session.success = 'Your email has been changed';
+					res.redirect('/profile');
+				})
+			}
+		}
+		if (city) {
+			if (city.search(RegexBoth)) {
+				req.session.error = 'The city must only contain alphabets';
+				res.redirect('/profile');
+			// } else if (name.length < 1) {
+			// 	req.session.error = 'The city must contain more than one characters';
+			// 	res.redirect('/profile');
+			} else {
+				conn.query('UPDATE user SET city = ? where signin = ?', [city, req.session.signin], (err) => {
+					if (err) console.log(err)
+					req.session.city = city
+					req.session.success = 'Your city has been changed';
+					res.redirect('/profile');
+				})
+			}
+		}
+		if (sexual_preference) {
+			//if (sexual_preference.search(RegexBoth)) {
+			//	req.session.error = 'The sexual preference must only contain alphabets';
+			//	res.redirect('/profile');
+			// } else if (name.length < 1) {
+			// 	req.session.error = 'The sexual preference must contain more than one characters';
+			// 	res.redirect('/profile');
+			//} else {
+			conn.query('UPDATE user SET sexual_preference = ? where signin = ?', [sexual_preference, req.session.signin], (err) => {
+				if (err) console.log(err)
+				req.session.sexual_preference = sexual_preference
+				req.session.success = 'Your sexual preference has been changed';
+				res.redirect('/profile');
+			})
+		//	}
 		}
 	} else {
 		req.session.error = 'Please sign in';
