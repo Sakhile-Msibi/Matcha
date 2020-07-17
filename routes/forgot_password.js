@@ -1,7 +1,7 @@
 var conn = require('../config/conn.js');
 var express = require('express');
 var session = require('express-session');
-var nodeMail = require('node-mailer');
+const nodeMail = require('nodemailer');
 var regexMail = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\")){3,40}@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,6})$/i;
 var router = express.Router();
 
@@ -33,7 +33,7 @@ router.post('/', function(req, res, next) {
 						from: 'thembinkosimsibi198@gmail.com',
 						subject: 'Matcha Password Reset',
 						text: 'Here is the link to change your matcha password ' +
-						'http://localhost:8080' + '/password_reset/' + hash + '\n\n' +
+						'http://localhost:3000' + '/password_reset/' + hash + '\n\n' +
 						'If you did not request this, please ignore this email.\n'
 					}
 					smtpTransport.sendMail(mailOptions, function(err) {
