@@ -39,13 +39,24 @@ router.get('/', loginchecker.redirectLogin, function(req, res, next) {
 							var profile = rows
 							res.render('home', { title: 'Express', profile: profile, skip: skip, skip1: skip1, skip2: skip2})
 						})
+					} else if (sexual_preference == "male" && gender == "male") {
+						conn.query("SELECT signin, name, surname, gender, age, sexual_preference, description, profilePic FROM user WHERE gender = ? AND city = ? AND signin != ? AND profilePic IS NOT NULL AND (sexual_preference = ? OR sexual_preference = ?)", ["male", city, signin, "male", "both"], (err, rows, result) => {
+							if (err) console.log(err)
+							var profile = rows
+							res.render('home', { title: 'Express', profile: profile, skip: skip, skip1: skip1, skip2: skip2})
+						})
 					} else if (sexual_preference == "male" && gender == "female") {
 						conn.query("SELECT signin, name, surname, gender, age, sexual_preference, description, profilePic FROM user WHERE gender = ? AND city = ? AND signin != ? AND profilePic IS NOT NULL AND (sexual_preference = ? OR sexual_preference = ?)", ["male", city, signin, "female", "both"], (err, rows, result) => {
 							if (err) console.log(err)
 							var profile = rows
 							res.render('home', { title: 'Express', profile: profile, skip: skip, skip1: skip1, skip2: skip2})
 						})
-
+					} else if (sexual_preference == "female" && gender == "female") {
+						conn.query("SELECT signin, name, surname, gender, age, sexual_preference, description, profilePic FROM user WHERE gender = ? AND city = ? AND signin != ? AND profilePic IS NOT NULL AND (sexual_preference = ? OR sexual_preference = ?)", ["female", city, signin, "female", "both"], (err, rows, result) => {
+							if (err) console.log(err)
+							var profile = rows
+							res.render('home', { title: 'Express', profile: profile, skip: skip, skip1: skip1, skip2: skip2})
+						})
 					} else if (sexual_preference == "both" && gender == "male") {
 						conn.query("SELECT signin, name, surname, gender, age, sexual_preference, description, profilePic FROM user WHERE (gender = ? OR gender = ?) AND city = ? AND signin != ? AND profilePic IS NOT NULL AND sexual_preference = ?", ["male", "female", city, signin, "male"], (err, rows, result) => {
 							if (err) console.log(err)

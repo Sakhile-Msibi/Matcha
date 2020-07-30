@@ -7,7 +7,7 @@ var connection = mysql.createConnection({
 	host     : 'localhost',
 	port	 : 3306,
 	user     : 'root',
-	password : ''
+	password : 'Sakhile198'
 });
 
 //Catching errors
@@ -147,6 +147,19 @@ connection.query('CREATE TABLE IF NOT EXISTS blocked ('
 		console.log('Table message created !');
 	}
 })
+
+//		CATFISH
+connection.query('CREATE TABLE IF NOT EXISTS catfish ('
+	+ 'id INT(9) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,'
+	+ 'signin VARCHAR(100) NOT NULL,'
+	//+ 'catfish VARCHAR(100) NOT NULL,'
+	+ 'report VARCHAR(100) NOT NULL)', function(err) {
+	if (err) throw err;
+	else {
+		console.log('Table catfish created !');
+	}
+});
+
 
 //FILL TABLE USER :
 /*

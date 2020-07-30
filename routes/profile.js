@@ -2,6 +2,7 @@ var conn = require('../config/conn.js');
 var express = require('express');
 var session = require('express-session');
 var fileUpload = require('express-fileupload');
+var bcryptjs = require('bcryptjs');
 var router = express.Router();
 const regexMail = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\")){3,40}@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,6})$/i;
 
@@ -173,6 +174,9 @@ router.post('/upload/:id', function(req, res, next) {
 router.post('/base', function(req, res, next) {
 	if (req.session && req.session.signin) {
 		var name = req.body.name;
+		var signin = req.body.signin;
+		var pswd = req.body.pswd;
+		var	hash = bcryptjs.hashSync(pswd, 10);
 		var	surname = req.body.surname;
 		var email = req.body.email;
 		var city = req.body.city;
@@ -210,6 +214,42 @@ router.post('/base', function(req, res, next) {
 				conn.query('UPDATE user SET surname = ? where signin = ?', [surname, req.session.signin], (err) => {
 					if (err) console.log(err)
 					req.session.surname = surname
+					req.session.success = 'Your surname has been changed';
+					res.redirect('/profile');
+				})
+			}
+		}
+		if (signin) {
+			if (signin.search(RegexBoth)) {
+				req.session.error = 'The username must only contain alphabets';
+				res.redirect('/profile');
+			} else if (surname.length > 18) {
+				req.session.error = 'The username must be less than 18 characters';
+				res.redirect('/profile');
+			} else {
+				conn.query('UPDATE user SET signin = ? where signin = ?', [signin, req.session.signin], (err) => {
+					if (err) console.log(err)
+					req.session.signin = signin
+					req.session.success = 'Your username has been changed';
+					res.redirect('/profile');
+				})
+			}
+		}
+		if (pswd) {
+			if (pswd.search(RegexBoth)) {
+				req.session.error = 'The password must only contain alphabets';
+				res.redirect('/profile');
+			} else if (pswd.length > 8) {
+				req.session.error = 'The password must be less than 8 characters';
+				res.redirect('/profile');
+			} else if (pswd.regexAlphanumeric) {
+				req.session.error = 'The password must contain lettrs and number';
+				res.redirect('/profile');
+			
+			} else {
+				conn.query('UPDATE user SET passwd = ? where signin = ?', [hash, req.session.signin], (err) => {
+					if (err) console.log(err)
+					req.session.pswd = hash;
 					req.session.success = 'Your surname has been changed';
 					res.redirect('/profile');
 				})
