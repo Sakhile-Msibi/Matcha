@@ -5,7 +5,7 @@ var conn = mysql.createConnection({
 	port	 : 3306,
 	user	 : 'root',
 	database : 'matcha',
-	password : ''
+	password : 'Sakhile198'
 });
 
 conn.connect(function(error){

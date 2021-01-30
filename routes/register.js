@@ -122,8 +122,8 @@ router.post('/', loginchecker.redirectDashboard, function(req, res) {
 					secure: true,
 					service: 'gmail',
 					auth: {
-						user: 'matchamanagment@gmail.com',
-						pass: 'welcometomatcha'
+						user: 'thembinkosimsibi198@gmail.com',
+						pass: '0786753565'
 					},
 					tls: {
 						// do not fail on invalid certs
@@ -133,7 +133,7 @@ router.post('/', loginchecker.redirectDashboard, function(req, res) {
 				// var emailToken = "jhdashghohwg2gwg";
 				const conUrl = `http://localhost:3000/confirmation/${emailToken}`;
 				const mailOptions = {
-					from: 'matchamanagment@gmail.com',
+					from: 'thembinkosimsibi198@gmail.com',
 					to: req.body.email,
 					subject: 'Please Verify your email',
 					text: `That was easy!`,
