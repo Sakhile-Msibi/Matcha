@@ -1,4 +1,7 @@
 ## Matcha
+<p align="center">
+  <img src="./public/matcha.png" width="90%"/>
+</p>
 
 The aim of this project is to create a dating website. The app allows two potential lovers to meet,
 from the registration to the final encounter. A user should be able to register, connect, fill his/her profile, search and look into
