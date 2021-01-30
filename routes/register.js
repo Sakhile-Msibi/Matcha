@@ -123,7 +123,7 @@ router.post('/', loginchecker.redirectDashboard, function(req, res) {
 					service: 'gmail',
 					auth: {
 						user: 'thembinkosimsibi198@gmail.com',
-						pass: '0786753565'
+						pass: ''
 					},
 					tls: {
 						// do not fail on invalid certs
